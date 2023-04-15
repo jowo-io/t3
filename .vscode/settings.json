@@ -1,0 +1,8 @@
+{
+  "tailwindCSS.includeLanguages": {
+    "typescript": "typescript",
+    "javascript": "javascript",
+    "html": "HTML"
+  },
+  "tailwindCSS.emmetCompletions": true
+}
