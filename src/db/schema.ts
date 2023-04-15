@@ -1,10 +1,4 @@
-import {
-  varchar,
-  text,
-  uniqueIndex,
-  timestamp,
-  pgTable,
-} from "drizzle-orm/pg-core";
+import { varchar, text, index, timestamp, pgTable } from "drizzle-orm/pg-core";
 
 export const example = pgTable("example", {
   id: varchar("id", { length: 191 }).primaryKey().notNull(),
@@ -17,6 +11,7 @@ export const posts = pgTable(
   {
     id: varchar("id", { length: 191 }).primaryKey().notNull(),
     user_id: varchar("user_id", { length: 191 }).notNull(),
+
     slug: varchar("slug", { length: 191 }).notNull(),
     title: text("title").notNull(),
     text: text("text").notNull(),
@@ -24,6 +19,6 @@ export const posts = pgTable(
     updated_at: timestamp("updated_at").defaultNow().notNull(),
   },
   (post) => ({
-    userIdIndex: uniqueIndex("posts__user_id__idx").on(post.user_id),
+    userIdIndex: index("posts__user_id__idx").on(post.user_id),
   })
 );
