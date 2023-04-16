@@ -7,7 +7,10 @@ import { z } from "zod";
 const server = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]),
 
-  DATABASE_URL: z.string(),
+  DB_HOST: z.string(),
+  DB_USERNAME: z.string(),
+  DB_PASSWORD: z.string(),
+  DB_NAME: z.string(),
 
   NEXTAUTH_SECRET:
     process.env.NODE_ENV === "production"
@@ -49,7 +52,10 @@ const client = z.object({
  * @type {Record<keyof z.infer<typeof server> | keyof z.infer<typeof client>, string | undefined>}
  */
 const processEnv = {
-  DATABASE_URL: process.env.DATABASE_URL,
+  DB_HOST: process.env.DB_HOST,
+  DB_USERNAME: process.env.DB_USERNAME,
+  DB_PASSWORD: process.env.DB_PASSWORD,
+  DB_NAME: process.env.DB_NAME,
 
   NODE_ENV: process.env.NODE_ENV,
 

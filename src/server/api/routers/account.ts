@@ -48,7 +48,7 @@ export const accountRouter = createTRPCRouter({
         name: z.string().min(2).max(100).optional(),
       })
     )
-    .mutation(({ ctx, input }) => {
+    .mutation(async ({ ctx, input }) => {
       const { s3, session } = ctx;
       const userId = session?.user?.id;
       const email = session?.user?.email;
@@ -62,11 +62,9 @@ export const accountRouter = createTRPCRouter({
         data.name = input.name;
       }
 
-      return ctx.db
-        .update(users)
-        .set(data)
-        .where(eq(users.email, email))
-        .returning();
+      await ctx.db.update(users).set(data).where(eq(users.email, email));
+
+      return ctx.db.select().from(users).where(eq(users.email, email));
     }),
 
   getAccount: publicProcedure.query(({ ctx }) => {

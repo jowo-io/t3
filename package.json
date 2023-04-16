@@ -9,8 +9,7 @@
     "start": "next start",
     "db:up": "drizzle-kit up:pg --config drizzle.config.ts",
     "db:generate": "drizzle-kit generate:pg --config drizzle.config.ts",
-    "db:drop": "drizzle-kit drop --config drizzle.config.ts",
-    "db:check": "drizzle-kit check:pg --config drizzle.config.ts"
+    "db:push": "drizzle-kit push:mysql --config drizzle.config.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.312.0",
@@ -24,11 +23,11 @@
     "cuid": "^3.0.0",
     "dotenv": "^16.0.3",
     "drizzle-orm": "^0.23.2",
+    "mysql2": "^3.2.0",
     "next": "^13.2.1",
     "next-auth": "^4.19.0",
     "nodemailer": "^6.9.1",
     "pica": "^9.0.1",
-    "postgres": "^3.3.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "superjson": "1.9.1",
@@ -43,7 +42,7 @@
     "@typescript-eslint/eslint-plugin": "^5.53.0",
     "@typescript-eslint/parser": "^5.53.0",
     "autoprefixer": "^10.4.7",
-    "drizzle-kit": "^0.17.1-609a4f0",
+    "drizzle-kit": "^0.17.1-6474464",
     "eslint": "^8.34.0",
     "eslint-config-next": "^13.2.1",
     "postcss": "^8.4.14",
