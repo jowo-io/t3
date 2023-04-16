@@ -8,7 +8,7 @@ import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
 import { users } from "@/db/auth";
 
 const bucketName = "plunda";
-const ext = "png";
+const ext = "webp";
 
 function getAvatarPath(userId: string) {
   return `avatars/${userId}.${ext}`;

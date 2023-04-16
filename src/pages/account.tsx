@@ -54,7 +54,7 @@ const Home: NextPage = () => {
     (async () => {
       const url = await signedUrl.mutateAsync();
       if (!url) return;
-      const blob = await resize(file, "image/png", 200);
+      const blob = await resize(file, "image/webp", 200);
 
       const size = (blob.size / (1024 * 1024)).toFixed(2);
       console.log(`Resized file size is ${size} MB`);
@@ -76,7 +76,7 @@ const Home: NextPage = () => {
       <pre className="text-white">{JSON.stringify(account, null, 2)}</pre>
       <input
         type="file"
-        accept="image/png, image/jpeg"
+        accept="image/png, image/jpeg, image/gif, image/webp"
         onChange={uploadPhoto}
       />
       {account?.image && (
