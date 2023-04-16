@@ -19,7 +19,7 @@ const config = {
     defaultLocale: "en",
   },
   env: {
-    STORAGE_PUBLIC_URL: process.env.STORAGE_PUBLIC_URL,
+    STORAGE_PUBLIC_URL: process.env.STORAGE_PUBLIC_URL || "",
   },
 };
 export default config;

@@ -17,9 +17,7 @@ function resize(blob: Blob, mimeType: string, size: number): Promise<Blob> {
       canvas.height = height;
       const pica = Pica();
       pica
-        .resize(image, canvas, {
-          alpha: true,
-        })
+        .resize(image, canvas, {})
         .then((result) => pica.toBlob(result, mimeType, 0.9))
         .then((resizedBlob) => resolve(resizedBlob))
         .catch((error) => reject(error));
@@ -32,19 +30,19 @@ const Home: NextPage = () => {
   const signedUrl = api.account.createSignedAvatarUrl.useMutation();
   const updateAccount = api.account.updateAccount.useMutation();
   const getAccount = api.account.getAccount.useQuery();
-  const [account, setAccount] = useState();
+  const [account, setAccount] = useState<any>();
   const [name, setName] = useState("");
 
   useEffect(() => {
     const newAccount = getAccount?.data?.[0];
     setAccount(newAccount);
-    setName(newAccount?.name);
+    setName(newAccount?.name || "");
   }, [getAccount?.data]);
 
   useEffect(() => {
     const newAccount = updateAccount?.data?.[0];
     setAccount(newAccount);
-    setName(newAccount?.name);
+    setName(newAccount?.name || "");
   }, [updateAccount?.data]);
 
   const uploadPhoto = async (e: React.ChangeEvent<HTMLInputElement>) => {

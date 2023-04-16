@@ -14,8 +14,7 @@ function getAvatarPath(userId: string) {
   return `avatars/${userId}.${ext}`;
 }
 function removeVersionQueryParam(path: string): string {
-  if (!path) return "";
-  return path.split("?")[0];
+  return path?.split("?")?.[0] || "";
 }
 function replaceVersionQueryParam(path: string): string {
   if (!path) return "";
