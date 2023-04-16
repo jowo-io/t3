@@ -1,26 +1,26 @@
 import { z } from "zod";
 import { eq } from "drizzle-orm/expressions";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
+import { PutObjectCommand } from "@aws-sdk/client-s3";
 
-import {
-  createTRPCRouter,
-  publicProcedure,
-  protectedProcedure,
-} from "@/server/api/trpc";
+import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
 
 import { users } from "@/db/auth";
 
 const bucketName = "plunda";
+const ext = "png";
 
-const s3 = new S3Client({
-  endpoint: `https://${process.env.STORAGE_ENDPOINT}`,
-  region: process.env.STORAGE_REGION,
-  credentials: {
-    accessKeyId: process.env.STORAGE_ACCESS_KEY as string,
-    secretAccessKey: process.env.STORAGE_SECRET_KEY as string,
-  },
-});
+function getAvatarPath(userId: string) {
+  return `avatars/${userId}.${ext}`;
+}
+function removeVersionQueryParam(path: string): string {
+  if (!path) return "";
+  return path.split("?")[0];
+}
+function replaceVersionQueryParam(path: string): string {
+  if (!path) return "";
+  return removeVersionQueryParam(path) + `?v=${Date.now()}`;
+}
 
 export const accountRouter = createTRPCRouter({
   hello: publicProcedure
@@ -31,18 +31,33 @@ export const accountRouter = createTRPCRouter({
       };
     }),
 
-  getSignedAvatarUrl: publicProcedure.query(async ({ ctx }) => {
-    const userId = ctx.session?.user?.id;
+  createSignedAvatarUrl: publicProcedure.mutation(async ({ ctx }) => {
+    const { s3, session } = ctx;
+    const userId = session?.user?.id;
     if (!userId) return null;
-    const pathName = `avatars/${userId}.webp`;
-    const input = {
-      Bucket: bucketName,
-      Key: pathName,
-    };
-    const command = new GetObjectCommand(input);
+    const pathName = getAvatarPath(userId);
+    const command = new PutObjectCommand({ Bucket: bucketName, Key: pathName });
     const url = await getSignedUrl(s3, command, { expiresIn: 3600 });
     return url;
   }),
+
+  updateAccount: publicProcedure
+    .input(z.object({ isImage: z.boolean() }))
+    .mutation(({ ctx, input }) => {
+      const { s3, session } = ctx;
+      const userId = session?.user?.id;
+      const email = session?.user?.email;
+      if (!email || !userId) return [];
+      const data: { image?: string } = {};
+      if (input.isImage) {
+        data.image = replaceVersionQueryParam(getAvatarPath(userId));
+      }
+      return ctx.db
+        .update(users)
+        .set(data)
+        .where(eq(users.email, email))
+        .returning();
+    }),
 
   getAccount: publicProcedure.query(({ ctx }) => {
     const email = ctx.session?.user?.email;

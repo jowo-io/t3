@@ -27,8 +27,9 @@ const server = z.object({
   EMAIL_SERVER_PORT: z.string().min(1),
   EMAIL_FROM: z.string().min(1),
 
+  STORAGE_PUBLIC_URL: z.string().url(),
   STORAGE_REGION: z.string().min(1),
-  STORAGE_ENDPOINT: z.string().min(1),
+  STORAGE_ENDPOINT: z.string().url(),
   STORAGE_ACCESS_KEY: z.string().min(1),
   STORAGE_SECRET_KEY: z.string().min(1),
 });
@@ -61,6 +62,7 @@ const processEnv = {
   EMAIL_SERVER_PORT: process.env.EMAIL_SERVER_PORT,
   EMAIL_FROM: process.env.EMAIL_FROM,
 
+  STORAGE_PUBLIC_URL: process.env.STORAGE_PUBLIC_URL,
   STORAGE_REGION: process.env.STORAGE_REGION,
   STORAGE_ENDPOINT: process.env.STORAGE_ENDPOINT,
   STORAGE_ACCESS_KEY: process.env.STORAGE_ACCESS_KEY,

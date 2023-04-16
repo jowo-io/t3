@@ -1,18 +1,22 @@
 install
 python3 -m pip install localstack
 
+# Service providers
+
+railway.app
+cloudflare
+github
+
 # Current stack
 
 nextjs
 tailwind
 eslint/prettier
-jest
-github
 typescript
 postgres
 drizzle
 tRPC
-railway.app
+aws/s3-client
 
 ### To add:
 
@@ -58,4 +62,25 @@ NEXTAUTH_URL=${{RAILWAY_STATIC_URL}}
 
 ```bash
 openssl rand -base64 32
+```
+
+# CloudFlare
+
+Cors rules must be added (WIP):
+
+```
+[
+  {
+    "AllowedOrigins": [
+      "http://localhost:3000"
+    ],
+    "AllowedMethods": [
+      "GET",
+      "PUT"
+    ],
+    "AllowedHeaders": [
+      "*"
+    ]
+  }
+]
 ```
