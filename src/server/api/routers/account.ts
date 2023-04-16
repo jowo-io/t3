@@ -42,16 +42,26 @@ export const accountRouter = createTRPCRouter({
   }),
 
   updateAccount: publicProcedure
-    .input(z.object({ isImage: z.boolean() }))
+    .input(
+      z.object({
+        isImage: z.boolean().optional(),
+        name: z.string().min(2).max(100).optional(),
+      })
+    )
     .mutation(({ ctx, input }) => {
       const { s3, session } = ctx;
       const userId = session?.user?.id;
       const email = session?.user?.email;
       if (!email || !userId) return [];
-      const data: { image?: string } = {};
+      const data: { image?: string; name?: string } = {};
+
       if (input.isImage) {
         data.image = replaceVersionQueryParam(getAvatarPath(userId));
       }
+      if (input.name) {
+        data.name = input.name;
+      }
+
       return ctx.db
         .update(users)
         .set(data)
