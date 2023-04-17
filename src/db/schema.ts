@@ -1,4 +1,5 @@
 import {
+  boolean,
   index,
   mysqlTable,
   text,
@@ -17,7 +18,7 @@ export const posts = mysqlTable(
   {
     id: varchar("id", { length: 191 }).primaryKey().notNull(),
     user_id: varchar("user_id", { length: 191 }).notNull(),
-
+    published: boolean("published").notNull(),
     slug: varchar("slug", { length: 191 }).notNull(),
     title: text("title").notNull(),
     text: text("text").notNull(),
