@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "next build && npm run db:push",
+    "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start",
-    "db:up": "drizzle-kit up:pg --config drizzle.config.ts",
-    "db:generate": "drizzle-kit generate:pg --config drizzle.config.ts",
+    "db:up": "drizzle-kit up:mysql --config drizzle.config.ts",
+    "db:generate": "drizzle-kit generate:mysql --config drizzle.config.ts",
     "db:push": "drizzle-kit push:mysql --config drizzle.config.ts"
   },
   "dependencies": {
