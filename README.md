@@ -25,6 +25,7 @@ cloudflare
 vercel
 planetscale
 github
+mailjet
 
 # Current stack
 
