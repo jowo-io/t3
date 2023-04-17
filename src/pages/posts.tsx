@@ -21,14 +21,12 @@ export const getServerSideProps = async ({
     .where(and(eq(posts.user_id, userId), eq(posts.published, true)));
 
   console.log("feed", userId, feed);
-  const out: {
-    props: { feed: typeof feed };
-  } = {
+  return {
     props: {
-      feed: JSON.parse(JSON.stringify(feed)), // work around to serialize date object
+      // workaround to serialize date object
+      feed: JSON.parse(JSON.stringify(feed)) as typeof feed,
     },
   };
-  return out;
 };
 
 export default function PostsPage({
