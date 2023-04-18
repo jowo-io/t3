@@ -1,24 +1,19 @@
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import { useSession } from "next-auth/react";
-import { getServerSession } from "next-auth/next";
 import { eq, and } from "drizzle-orm/expressions";
 
-import { authOptions } from "@/server/auth";
+import { getServerAuthSession } from "@/server/auth";
 import { db } from "@/server/db";
 import { posts } from "@/db/schema";
 
-export const getServerSideProps = async ({
-  req,
-  res,
-}: GetServerSidePropsContext) => {
-  const session = await getServerSession(req, res, authOptions);
-  const userId = session?.user?.id;
-  if (!session || !userId) return { props: { feed: [] } };
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const { user } = await getServerAuthSession(ctx);
+  if (!user?.id) return { props: { feed: [] } };
 
   const feed = await db
     .select()
     .from(posts)
-    .where(and(eq(posts.user_id, userId), eq(posts.published, true)));
+    .where(and(eq(posts.user_id, user.id), eq(posts.published, true)));
 
   return {
     props: { feed },
