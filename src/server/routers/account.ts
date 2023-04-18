@@ -3,7 +3,7 @@ import { eq } from "drizzle-orm/expressions";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 
-import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
+import { createTRPCRouter, publicProcedure } from "@/server/trpc";
 
 import { users } from "@/db/auth";
 

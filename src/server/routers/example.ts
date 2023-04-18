@@ -4,7 +4,7 @@ import {
   createTRPCRouter,
   publicProcedure,
   protectedProcedure,
-} from "@/server/api/trpc";
+} from "@/server/trpc";
 
 import { example } from "@/db/schema";
 

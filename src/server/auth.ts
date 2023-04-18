@@ -7,7 +7,7 @@ import {
 
 import EmailProvider from "next-auth/providers/email";
 
-import { DrizzleAdapter } from "./adapters/drizzleAdapter";
+import { DrizzleAdapter } from "./adapters/drizzle";
 import { db } from "@/server/db";
 
 /**
