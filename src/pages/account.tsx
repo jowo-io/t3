@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { type NextPage } from "next";
 import Pica from "pica";
 import axios from "axios";
+
 import { api } from "@/utils/api";
 
 function resize(blob: Blob, mimeType: string, size: number): Promise<Blob> {

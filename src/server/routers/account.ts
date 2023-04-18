@@ -48,10 +48,9 @@ export const accountRouter = createTRPCRouter({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      const { s3, session } = ctx;
+      const { session } = ctx;
       const userId = session?.user?.id;
-      const email = session?.user?.email;
-      if (!email || !userId) return [];
+      if (!userId) return [];
       const data: { image?: string; name?: string } = {};
 
       if (input.isImage) {
@@ -61,14 +60,15 @@ export const accountRouter = createTRPCRouter({
         data.name = input.name;
       }
 
-      await ctx.db.update(users).set(data).where(eq(users.email, email));
+      await ctx.db.update(users).set(data).where(eq(users.id, userId));
 
-      return ctx.db.select().from(users).where(eq(users.email, email));
+      return ctx.db.select().from(users).where(eq(users.id, userId));
     }),
 
   getAccount: publicProcedure.query(({ ctx }) => {
-    const email = ctx.session?.user?.email;
-    if (!email) return [];
-    return ctx.db.select().from(users).where(eq(users.email, email));
+    const { session } = ctx;
+    const userId = session?.user?.id;
+    if (!userId) return [];
+    return ctx.db.select().from(users).where(eq(users.id, userId));
   }),
 });
