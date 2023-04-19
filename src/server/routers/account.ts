@@ -3,7 +3,11 @@ import { eq } from "drizzle-orm/expressions";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 
-import { createTRPCRouter, publicProcedure } from "@/server/trpc";
+import {
+  createTRPCRouter,
+  publicProcedure,
+  protectedProcedure,
+} from "@/server/trpc";
 
 import { users } from "@/db/auth";
 
@@ -29,14 +33,12 @@ export const accountRouter = createTRPCRouter({
         greeting: `Hello ${input.text}`,
       };
     }),
-  createSignedAvatarUrl: publicProcedure
+  createSignedAvatarUrl: protectedProcedure
     .input(z.undefined())
     .mutation(async ({ ctx }) => {
-      const { s3, session } = ctx;
-      const userId = session?.user?.id;
-      if (!userId) return null;
+      const { s3, user } = ctx;
 
-      const pathName = getAvatarPath(userId);
+      const pathName = getAvatarPath(user.id);
       const command = new PutObjectCommand({
         Bucket: bucketName,
         Key: pathName,
@@ -45,7 +47,7 @@ export const accountRouter = createTRPCRouter({
       return url;
     }),
 
-  updateAccount: publicProcedure
+  updateAccount: protectedProcedure
     .input(
       z.object({
         isImage: z.boolean().optional(),
@@ -53,28 +55,24 @@ export const accountRouter = createTRPCRouter({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      const { session } = ctx;
-      const userId = session?.user?.id;
-      if (!userId) return [];
+      const { user } = ctx;
 
       const data: { image?: string; name?: string } = {};
       if (input.isImage) {
-        data.image = replaceVersionQueryParam(getAvatarPath(userId));
+        data.image = replaceVersionQueryParam(getAvatarPath(user.id));
       }
       if (input.name) {
         data.name = input.name;
       }
 
-      await ctx.db.update(users).set(data).where(eq(users.id, userId));
+      await ctx.db.update(users).set(data).where(eq(users.id, user.id));
 
-      return ctx.db.select().from(users).where(eq(users.id, userId));
+      return ctx.db.select().from(users).where(eq(users.id, user.id));
     }),
 
-  getAccount: publicProcedure.query(({ ctx }) => {
-    const { session } = ctx;
-    const userId = session?.user?.id;
-    if (!userId) return [];
+  getAccount: protectedProcedure.query(({ ctx }) => {
+    const { user } = ctx;
 
-    return ctx.db.select().from(users).where(eq(users.id, userId));
+    return ctx.db.select().from(users).where(eq(users.id, user.id));
   }),
 });
