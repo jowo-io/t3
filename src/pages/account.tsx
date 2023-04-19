@@ -1,30 +1,9 @@
 import { useEffect, useState } from "react";
 import { type NextPage } from "next";
-import Pica from "pica";
 import axios from "axios";
 
-import { api } from "@/utils/api";
-
-function resize(blob: Blob, mimeType: string, size: number): Promise<Blob> {
-  const canvas = document.createElement("canvas") as HTMLCanvasElement;
-  const image = new Image();
-  setTimeout(() => (image.src = URL.createObjectURL(blob)));
-  return new Promise((resolve, reject) => {
-    image.onload = () => {
-      const aspect = image.width / image.height;
-      const width = image.width > image.height ? size : size * aspect;
-      const height = image.width > image.height ? size / aspect : size;
-      canvas.width = width;
-      canvas.height = height;
-      const pica = Pica();
-      pica
-        .resize(image, canvas, {})
-        .then((result) => pica.toBlob(result, mimeType, 0.9))
-        .then((resizedBlob) => resolve(resizedBlob))
-        .catch((error) => reject(error));
-    };
-  });
-}
+import { api } from "@/utils/client/api";
+import { resizeImageBlob } from "@/utils/client/pica";
 
 const Home: NextPage = () => {
   const hello = api.account.hello.useQuery({ text: "from account tRPC" });
@@ -53,12 +32,8 @@ const Home: NextPage = () => {
     (async () => {
       const url = await signedUrl.mutateAsync();
       if (!url) return;
-      const blob = await resize(file, "image/webp", 200);
 
-      const size = (blob.size / (1024 * 1024)).toFixed(2);
-      console.log(`Resized file size is ${size} MB`);
-
-      console.log("resized", blob);
+      const blob = await resizeImageBlob(file, "image/webp", 200);
       await axios.put(url, blob);
       updateAccount.mutate({ isImage: true });
     })();

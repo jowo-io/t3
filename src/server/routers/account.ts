@@ -29,16 +29,21 @@ export const accountRouter = createTRPCRouter({
         greeting: `Hello ${input.text}`,
       };
     }),
+  createSignedAvatarUrl: publicProcedure
+    .input(z.undefined())
+    .mutation(async ({ ctx }) => {
+      const { s3, session } = ctx;
+      const userId = session?.user?.id;
+      if (!userId) return null;
 
-  createSignedAvatarUrl: publicProcedure.mutation(async ({ ctx }) => {
-    const { s3, session } = ctx;
-    const userId = session?.user?.id;
-    if (!userId) return null;
-    const pathName = getAvatarPath(userId);
-    const command = new PutObjectCommand({ Bucket: bucketName, Key: pathName });
-    const url = await getSignedUrl(s3, command, { expiresIn: 3600 });
-    return url;
-  }),
+      const pathName = getAvatarPath(userId);
+      const command = new PutObjectCommand({
+        Bucket: bucketName,
+        Key: pathName,
+      });
+      const url = await getSignedUrl(s3, command, { expiresIn: 3600 });
+      return url;
+    }),
 
   updateAccount: publicProcedure
     .input(
@@ -51,8 +56,8 @@ export const accountRouter = createTRPCRouter({
       const { session } = ctx;
       const userId = session?.user?.id;
       if (!userId) return [];
-      const data: { image?: string; name?: string } = {};
 
+      const data: { image?: string; name?: string } = {};
       if (input.isImage) {
         data.image = replaceVersionQueryParam(getAvatarPath(userId));
       }
@@ -69,6 +74,7 @@ export const accountRouter = createTRPCRouter({
     const { session } = ctx;
     const userId = session?.user?.id;
     if (!userId) return [];
+
     return ctx.db.select().from(users).where(eq(users.id, userId));
   }),
 });

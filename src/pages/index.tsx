@@ -1,8 +1,8 @@
 import { type NextPage } from "next";
 
-import AuthShowcase from "@/components/AuthShowcase";
+import AuthShowcase from "@/ui/AuthShowcase";
 
-import { api } from "@/utils/api";
+import { api } from "@/utils/client/api";
 
 const Home: NextPage = () => {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
