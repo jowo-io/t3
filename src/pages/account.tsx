@@ -32,10 +32,8 @@ const Home: NextPage = () => {
     if (!file) return;
 
     (async () => {
-      const url = await signedUrl.mutateAsync();
-      if (!url) return;
-
       const blob = await resizeImageBlob(file, "image/webp", 200);
+      const url = await signedUrl.mutateAsync({ size: blob.size });
       await axios.put(url, blob);
       updateAccount.mutate({ isImage: true });
     })();

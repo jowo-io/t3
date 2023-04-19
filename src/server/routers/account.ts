@@ -34,14 +34,20 @@ export const accountRouter = createTRPCRouter({
       };
     }),
   createSignedAvatarUrl: protectedProcedure
-    .input(z.undefined())
-    .mutation(async ({ ctx }) => {
+    .input(
+      z.object({
+        size: z.number().min(1).max(50000),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
       const { s3, user } = ctx;
+      const { size } = input;
 
       const pathName = getAvatarPath(user.id);
       const command = new PutObjectCommand({
         Bucket: bucketName,
         Key: pathName,
+        ContentLength: size,
       });
       const url = await getSignedUrl(s3, command, { expiresIn: 3600 });
       return url;
