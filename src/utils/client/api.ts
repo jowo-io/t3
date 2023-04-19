@@ -7,6 +7,8 @@ import { type AppRouter } from "@/server/routers";
 
 import { getBaseUrl } from "@/utils/isomorphic/url";
 
+import { env } from "@/env.mjs";
+console.log(env.NODE_ENV);
 export const api = createTRPCNext<AppRouter>({
   config() {
     return {
@@ -15,7 +17,7 @@ export const api = createTRPCNext<AppRouter>({
       links: [
         loggerLink({
           enabled: (opts) =>
-            process.env.NODE_ENV === "development" ||
+            env.NODE_ENV === "development" ||
             (opts.direction === "down" && opts.result instanceof Error),
         }),
         httpBatchLink({

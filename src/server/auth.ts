@@ -10,6 +10,8 @@ import EmailProvider from "next-auth/providers/email";
 import { DrizzleAdapter } from "./adapters/drizzle";
 import { db } from "@/server/db";
 
+import { env } from "@/env.mjs";
+
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
  * object and keep type safety.
@@ -56,14 +58,14 @@ export const authOptions: NextAuthOptions = {
         return `${local}@${domain}`;
       },
       server: {
-        host: process.env.EMAIL_SERVER_HOST,
-        port: process.env.EMAIL_SERVER_PORT,
+        host: env.EMAIL_SERVER_HOST,
+        port: env.EMAIL_SERVER_PORT,
         auth: {
-          user: process.env.EMAIL_SERVER_USER,
-          pass: process.env.EMAIL_SERVER_PASSWORD,
+          user: env.EMAIL_SERVER_USER,
+          pass: env.EMAIL_SERVER_PASSWORD,
         },
       },
-      from: process.env.EMAIL_FROM,
+      from: env.EMAIL_FROM,
       maxAge: 15 * 60, // 15 minutes
     }),
   ],

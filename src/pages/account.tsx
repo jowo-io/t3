@@ -5,6 +5,8 @@ import axios from "axios";
 import { api } from "@/utils/client/api";
 import { resizeImageBlob } from "@/utils/client/pica";
 
+import { env } from "@/env.mjs";
+
 const Home: NextPage = () => {
   const hello = api.account.hello.useQuery({ text: "from account tRPC" });
   const signedUrl = api.account.createSignedAvatarUrl.useMutation();
@@ -54,7 +56,7 @@ const Home: NextPage = () => {
         onChange={uploadPhoto}
       />
       {account?.image && (
-        <img src={process.env.STORAGE_PUBLIC_URL + account?.image} />
+        <img src={env.NEXT_PUBLIC_STORAGE_URL + account?.image} />
       )}
       <hr className="my-8 h-px w-full border-0 bg-white" />
 

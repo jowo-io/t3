@@ -1,49 +1,6 @@
 import { z } from "zod";
 
-/**
- * Specify your server-side environment variables schema here. This way you can ensure the app isn't
- * built with invalid env vars.
- */
-const server = z.object({
-  NODE_ENV: z.enum(["development", "test", "production"]),
-
-  DB_HOST: z.string(),
-  DB_USERNAME: z.string(),
-  DB_PASSWORD: z.string(),
-  DB_NAME: z.string(),
-
-  NEXTAUTH_SECRET:
-    process.env.NODE_ENV === "production"
-      ? z.string().min(1)
-      : z.string().min(1).optional(),
-
-  EMAIL_SERVER_USER: z.string().min(1),
-  EMAIL_SERVER_PASSWORD: z.string().min(1),
-  EMAIL_SERVER_HOST: z.string().min(1),
-  EMAIL_SERVER_PORT: z.string().min(1),
-  EMAIL_FROM: z.string().min(1),
-
-  STORAGE_PUBLIC_URL: z.string().url(),
-  STORAGE_REGION: z.string().min(1),
-  STORAGE_ENDPOINT: z.string().url(),
-  STORAGE_ACCESS_KEY: z.string().min(1),
-  STORAGE_SECRET_KEY: z.string().min(1),
-});
-
-/**
- * Specify your client-side environment variables schema here. This way you can ensure the app isn't
- * built with invalid env vars. To expose them to the client, prefix them with `NEXT_PUBLIC_`.
- */
-const client = z.object({
-  STORAGE_PUBLIC_URL: z.string().min(1),
-});
-
-/**
- * You can't destruct `process.env` as a regular object in the Next.js edge runtimes (e.g.
- * middlewares) or client-side so we need to destruct manually.
- *
- * @type {Record<keyof z.infer<typeof server> | keyof z.infer<typeof client>, string | undefined>}
- */
+/** @type {Record<keyof z.infer<typeof server> | keyof z.infer<typeof client>, string | undefined>} */
 const processEnv = {
   DB_HOST: process.env.DB_HOST,
   DB_USERNAME: process.env.DB_USERNAME,
@@ -60,12 +17,41 @@ const processEnv = {
   EMAIL_SERVER_PORT: process.env.EMAIL_SERVER_PORT,
   EMAIL_FROM: process.env.EMAIL_FROM,
 
-  STORAGE_PUBLIC_URL: process.env.STORAGE_PUBLIC_URL,
+  NEXT_PUBLIC_STORAGE_URL: process.env.NEXT_PUBLIC_STORAGE_URL,
   STORAGE_REGION: process.env.STORAGE_REGION,
   STORAGE_ENDPOINT: process.env.STORAGE_ENDPOINT,
   STORAGE_ACCESS_KEY: process.env.STORAGE_ACCESS_KEY,
   STORAGE_SECRET_KEY: process.env.STORAGE_SECRET_KEY,
 };
+
+const client = z.object({
+  NODE_ENV: z.enum(["development", "test", "production"]),
+
+  NEXT_PUBLIC_STORAGE_URL: z.string().min(1),
+});
+
+const server = z.object({
+  DB_HOST: z.string(),
+  DB_USERNAME: z.string(),
+  DB_PASSWORD: z.string(),
+  DB_NAME: z.string(),
+
+  NEXTAUTH_SECRET:
+    process.env.NODE_ENV === "production"
+      ? z.string().min(1)
+      : z.string().min(1).optional(),
+
+  EMAIL_SERVER_USER: z.string().min(1),
+  EMAIL_SERVER_PASSWORD: z.string().min(1),
+  EMAIL_SERVER_HOST: z.string().min(1),
+  EMAIL_SERVER_PORT: z.string().min(1),
+  EMAIL_FROM: z.string().min(1),
+
+  STORAGE_REGION: z.string().min(1),
+  STORAGE_ENDPOINT: z.string().url(),
+  STORAGE_ACCESS_KEY: z.string().min(1),
+  STORAGE_SECRET_KEY: z.string().min(1),
+});
 
 // Don't touch the part below
 // --------------------------
@@ -100,7 +86,7 @@ if (!!process.env.SKIP_ENV_VALIDATION == false) {
       if (typeof prop !== "string") return undefined;
       // Throw a descriptive error if a server-side env var is accessed on the client
       // Otherwise it would just be returning `undefined` and be annoying to debug
-      if (!isServer && !prop.startsWith("NEXT_PUBLIC_"))
+      if (!isServer && !prop.startsWith("NEXT_PUBLIC_") && prop !== "NODE_ENV")
         throw new Error(
           process.env.NODE_ENV === "production"
             ? "❌ Attempted to access a server-side environment variable on the client"

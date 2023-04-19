@@ -1,10 +1,12 @@
 import { S3 } from "@aws-sdk/client-s3";
 
+import { env } from "@/env.mjs";
+
 export const s3 = new S3({
-  endpoint: process.env.STORAGE_ENDPOINT,
-  region: process.env.STORAGE_REGION,
+  endpoint: env.STORAGE_ENDPOINT,
+  region: env.STORAGE_REGION,
   credentials: {
-    accessKeyId: process.env.STORAGE_ACCESS_KEY as string,
-    secretAccessKey: process.env.STORAGE_SECRET_KEY as string,
+    accessKeyId: env.STORAGE_ACCESS_KEY as string,
+    secretAccessKey: env.STORAGE_SECRET_KEY as string,
   },
 });

@@ -18,8 +18,5 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
-  env: {
-    STORAGE_PUBLIC_URL: process.env.STORAGE_PUBLIC_URL || "",
-  },
 };
 export default config;
