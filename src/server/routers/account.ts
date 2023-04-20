@@ -9,7 +9,7 @@ import {
   protectedProcedure,
 } from "@/server/trpc";
 
-import { users } from "@/db/auth";
+import { userTable } from "@/db/auth";
 
 const bucketName = "plunda";
 const ext = "webp";
@@ -71,14 +71,14 @@ export const accountRouter = createTRPCRouter({
         data.name = input.name;
       }
 
-      await ctx.db.update(users).set(data).where(eq(users.id, user.id));
+      await ctx.db.update(userTable).set(data).where(eq(userTable.id, user.id));
 
-      return ctx.db.select().from(users).where(eq(users.id, user.id));
+      return ctx.db.select().from(userTable).where(eq(userTable.id, user.id));
     }),
 
   getAccount: protectedProcedure.query(({ ctx }) => {
     const { user } = ctx;
 
-    return ctx.db.select().from(users).where(eq(users.id, user.id));
+    return ctx.db.select().from(userTable).where(eq(userTable.id, user.id));
   }),
 });

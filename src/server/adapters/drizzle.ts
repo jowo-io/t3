@@ -2,12 +2,17 @@ import type { Adapter } from "next-auth/adapters";
 import cuid from "cuid";
 import { and, eq } from "drizzle-orm/expressions";
 import { type MySql2Database } from "drizzle-orm/mysql2";
-import { accounts, sessions, users, verificationTokens } from "@/db/auth";
+import {
+  accountTable,
+  sessionTable,
+  userTable,
+  verificationTokenTable,
+} from "@/db/auth";
 
 export function DrizzleAdapter(db: MySql2Database): Adapter {
   return {
     async createUser(userData) {
-      await db.insert(users).values({
+      await db.insert(userTable).values({
         id: cuid(),
         email: userData.email,
         emailVerified: userData.emailVerified,
@@ -16,8 +21,8 @@ export function DrizzleAdapter(db: MySql2Database): Adapter {
       });
       const rows = await db
         .select()
-        .from(users)
-        .where(eq(users.email, userData.email))
+        .from(userTable)
+        .where(eq(userTable.email, userData.email))
         .limit(1);
       const row = rows[0];
       if (!row) throw new Error("User not found");
@@ -26,8 +31,8 @@ export function DrizzleAdapter(db: MySql2Database): Adapter {
     async getUser(id) {
       const rows = await db
         .select()
-        .from(users)
-        .where(eq(users.id, id))
+        .from(userTable)
+        .where(eq(userTable.id, id))
         .limit(1);
       const row = rows[0];
       return row ?? null;
@@ -35,8 +40,8 @@ export function DrizzleAdapter(db: MySql2Database): Adapter {
     async getUserByEmail(email) {
       const rows = await db
         .select()
-        .from(users)
-        .where(eq(users.email, email))
+        .from(userTable)
+        .where(eq(userTable.email, email))
         .limit(1);
       const row = rows[0];
       return row ?? null;
@@ -44,62 +49,63 @@ export function DrizzleAdapter(db: MySql2Database): Adapter {
     async getUserByAccount({ providerAccountId, provider }) {
       const rows = await db
         .select()
-        .from(users)
-        .innerJoin(accounts, eq(users.id, accounts.userId))
+        .from(userTable)
+        .innerJoin(accountTable, eq(userTable.id, accountTable.userId))
         .where(
           and(
-            eq(accounts.providerAccountId, providerAccountId),
-            eq(accounts.provider, provider)
+            eq(accountTable.providerAccountId, providerAccountId),
+            eq(accountTable.provider, provider)
           )
         )
         .limit(1);
       const row = rows[0];
-      return row?.users ?? null;
+      return row?.user ?? null;
     },
     async updateUser({ id, ...userData }) {
       if (!id) throw new Error("User not found");
-      await db.update(users).set(userData).where(eq(users.id, id));
+      await db.update(userTable).set(userData).where(eq(userTable.id, id));
       const rows = await db
         .select()
-        .from(users)
-        .where(eq(users.id, id))
+        .from(userTable)
+        .where(eq(userTable.id, id))
         .limit(1);
       const row = rows[0];
       if (!row) throw new Error("User not found");
       return row;
     },
     async deleteUser(userId) {
-      await db.delete(users).where(eq(users.id, userId));
+      await db.delete(userTable).where(eq(userTable.id, userId));
     },
     async linkAccount(account) {
-      await db.insert(accounts).values({
+      await db.insert(accountTable).values({
         id: cuid(),
         provider: account.provider,
         providerAccountId: account.providerAccountId,
         type: account.type,
         userId: account.userId,
+
         // OpenIDTokenEndpointResponse properties
-        access_token: account.access_token,
-        expires_in: account.expires_in as number,
-        id_token: account.id_token,
         refresh_token: account.refresh_token,
-        refresh_token_expires_in: account.refresh_token_expires_in as number, // TODO: why doesn't the account type have this property?
-        scope: account.scope,
+        access_token: account.access_token,
+        expires_at: account.expires_at as number,
         token_type: account.token_type,
+        scope: account.scope,
+        id_token: account.id_token,
+        session_state: account.session_state,
       });
     },
     async unlinkAccount({ providerAccountId, provider }) {
       await db
-        .delete(accounts)
+        .delete(accountTable)
         .where(
           and(
-            eq(accounts.providerAccountId, providerAccountId),
-            eq(accounts.provider, provider)
+            eq(accountTable.providerAccountId, providerAccountId),
+            eq(accountTable.provider, provider)
           )
         );
     },
     async createSession(data) {
-      await db.insert(sessions).values({
+      await db.insert(sessionTable).values({
         id: cuid(),
         expires: data.expires,
         sessionToken: data.sessionToken,
@@ -107,8 +113,8 @@ export function DrizzleAdapter(db: MySql2Database): Adapter {
       });
       const rows = await db
         .select()
-        .from(sessions)
-        .where(eq(sessions.sessionToken, data.sessionToken))
+        .from(sessionTable)
+        .where(eq(sessionTable.sessionToken, data.sessionToken))
         .limit(1);
       const row = rows[0];
       if (!row) throw new Error("User not found");
@@ -117,17 +123,17 @@ export function DrizzleAdapter(db: MySql2Database): Adapter {
     async getSessionAndUser(sessionToken) {
       const rows = await db
         .select({
-          user: users,
+          user: userTable,
           session: {
-            id: sessions.id,
-            userId: sessions.userId,
-            sessionToken: sessions.sessionToken,
-            expires: sessions.expires,
+            id: sessionTable.id,
+            userId: sessionTable.userId,
+            sessionToken: sessionTable.sessionToken,
+            expires: sessionTable.expires,
           },
         })
-        .from(sessions)
-        .innerJoin(users, eq(users.id, sessions.userId))
-        .where(eq(sessions.sessionToken, sessionToken))
+        .from(sessionTable)
+        .innerJoin(userTable, eq(userTable.id, sessionTable.userId))
+        .where(eq(sessionTable.sessionToken, sessionToken))
         .limit(1);
       const row = rows[0];
       if (!row) return null;
@@ -144,31 +150,33 @@ export function DrizzleAdapter(db: MySql2Database): Adapter {
     },
     async updateSession(session) {
       await db
-        .update(sessions)
+        .update(sessionTable)
         .set(session)
-        .where(eq(sessions.sessionToken, session.sessionToken));
+        .where(eq(sessionTable.sessionToken, session.sessionToken));
       const rows = await db
         .select()
-        .from(sessions)
-        .where(eq(sessions.sessionToken, session.sessionToken))
+        .from(sessionTable)
+        .where(eq(sessionTable.sessionToken, session.sessionToken))
         .limit(1);
       const row = rows[0];
       if (!row) throw new Error("Coding bug: updated session not found");
       return row;
     },
     async deleteSession(sessionToken) {
-      await db.delete(sessions).where(eq(sessions.sessionToken, sessionToken));
+      await db
+        .delete(sessionTable)
+        .where(eq(sessionTable.sessionToken, sessionToken));
     },
     async createVerificationToken(verificationToken) {
-      await db.insert(verificationTokens).values({
+      await db.insert(verificationTokenTable).values({
         expires: verificationToken.expires,
         identifier: verificationToken.identifier,
         token: verificationToken.token,
       });
       const rows = await db
         .select()
-        .from(verificationTokens)
-        .where(eq(verificationTokens.token, verificationToken.token))
+        .from(verificationTokenTable)
+        .where(eq(verificationTokenTable.token, verificationToken.token))
         .limit(1);
       const row = rows[0];
       if (!row)
@@ -179,18 +187,18 @@ export function DrizzleAdapter(db: MySql2Database): Adapter {
       // First get the token while it still exists. TODO: need to add identifier to where clause?
       const rows = await db
         .select()
-        .from(verificationTokens)
-        .where(eq(verificationTokens.token, token))
+        .from(verificationTokenTable)
+        .where(eq(verificationTokenTable.token, token))
         .limit(1);
       const row = rows[0];
       if (!row) return null;
       // Then delete it.
       await db
-        .delete(verificationTokens)
+        .delete(verificationTokenTable)
         .where(
           and(
-            eq(verificationTokens.token, token),
-            eq(verificationTokens.identifier, identifier)
+            eq(verificationTokenTable.token, token),
+            eq(verificationTokenTable.identifier, identifier)
           )
         );
       // Then return it.

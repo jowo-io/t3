@@ -6,9 +6,9 @@ import {
   protectedProcedure,
 } from "@/server/trpc";
 
-import { exampleTable } from "@/db/schema";
+import { postTable } from "@/db/schema";
 
-export const exampleRouter = createTRPCRouter({
+export const postRouter = createTRPCRouter({
   hello: publicProcedure
     .input(z.object({ text: z.string() }))
     .query(({ input }) => {
@@ -17,8 +17,8 @@ export const exampleRouter = createTRPCRouter({
       };
     }),
 
-  getExample: publicProcedure.query(({ ctx }) => {
-    return ctx.db.select().from(exampleTable);
+  getPost: publicProcedure.query(({ ctx }) => {
+    return ctx.db.select().from(postTable);
   }),
 
   getSecretMessage: protectedProcedure.query(() => {

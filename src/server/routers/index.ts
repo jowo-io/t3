@@ -1,5 +1,6 @@
 import { exampleRouter } from "@/server/routers/example";
 import { accountRouter } from "@/server/routers/account";
+import { postRouter } from "@/server/routers/post";
 
 import { createTRPCRouter } from "../trpc";
 
