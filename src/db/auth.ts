@@ -17,7 +17,7 @@ export const accountTable = mysqlTable(
     type: varchar("type", { length: 191 }).notNull(),
     provider: varchar("provider", { length: 191 }).notNull(),
     providerAccountId: varchar("providerAccountId", { length: 191 }).notNull(),
-    createdAt: timestamp("createdAt").defaultNow().onUpdateNow().notNull(),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
     updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 
     // OpenIDTokenEndpointResponse properties
@@ -44,8 +44,8 @@ export const sessionTable = mysqlTable(
     sessionToken: varchar("sessionToken", { length: 191 }).notNull(),
     userId: varchar("userId", { length: 191 }).notNull(),
     expires: datetime("expires").notNull(),
-    createdAt: timestamp("createdAt").notNull().defaultNow().onUpdateNow(),
-    updatedAt: timestamp("updatedAt").notNull().defaultNow().onUpdateNow(),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+    updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
   },
   (session) => ({
     sessionTokenIndex: uniqueIndex("session__sessionToken__idx").on(
@@ -63,8 +63,8 @@ export const userTable = mysqlTable(
     email: varchar("email", { length: 191 }).notNull(),
     emailVerified: timestamp("emailVerified"),
     image: varchar("image", { length: 191 }),
-    createdAt: timestamp("createdAt").notNull().defaultNow().onUpdateNow(),
-    updatedAt: timestamp("updatedAt").notNull().defaultNow().onUpdateNow(),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+    updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
   },
   (user) => ({
     emailIndex: uniqueIndex("user__email__idx").on(user.email),
@@ -77,8 +77,8 @@ export const verificationTokenTable = mysqlTable(
     identifier: varchar("identifier", { length: 191 }).primaryKey().notNull(),
     token: varchar("token", { length: 191 }).notNull(),
     expires: datetime("expires").notNull(),
-    createdAt: timestamp("createdAt").notNull().defaultNow().onUpdateNow(),
-    updatedAt: timestamp("updatedAt").notNull().defaultNow().onUpdateNow(),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+    updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
   },
   (verificationToken) => ({
     tokenIndex: uniqueIndex("verification_token__token__idx").on(

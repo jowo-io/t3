@@ -9,8 +9,8 @@ import {
 
 export const exampleTable = mysqlTable("example", {
   id: varchar("id", { length: 191 }).primaryKey().notNull(),
-  createdAt: timestamp("createdAt").notNull().defaultNow(),
-  updatedAt: timestamp("updatedAt").notNull().defaultNow(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });
 
 export const postTable = mysqlTable(
@@ -23,7 +23,7 @@ export const postTable = mysqlTable(
     title: text("title").notNull(),
     text: text("text").notNull(),
     createdAt: timestamp("createdAt").defaultNow().notNull(),
-    updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+    updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
   },
   (post) => ({
     userIdIndex: index("post__userId__idx").on(post.userId),
