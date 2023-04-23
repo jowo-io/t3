@@ -9,7 +9,7 @@ import {
   protectedProcedure,
 } from "@/server/trpc";
 
-import { validationSchema, fileExt } from "@/pages/account";
+import { validationSchema, fileExt } from "@/screens/Account/Edit";
 
 import { userTable } from "@/db/auth";
 
