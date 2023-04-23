@@ -9,13 +9,14 @@ import {
   protectedProcedure,
 } from "@/server/trpc";
 
+import { validationSchema, fileExt } from "@/pages/account";
+
 import { userTable } from "@/db/auth";
 
 const bucketName = "plunda";
-const ext = "webp";
 
 function getAvatarPath(userId: string) {
-  return `avatars/${userId}.${ext}`;
+  return `avatars/${userId}.${fileExt}`;
 }
 function removeVersionQueryParam(path: string): string {
   return path?.split("?")?.[0] || "";
@@ -26,13 +27,6 @@ function replaceVersionQueryParam(path: string): string {
 }
 
 export const accountRouter = createTRPCRouter({
-  hello: publicProcedure
-    .input(z.object({ text: z.string() }))
-    .query(({ input }) => {
-      return {
-        greeting: `Hello ${input.text}`,
-      };
-    }),
   createSignedAvatarUrl: protectedProcedure
     .input(
       z.object({
@@ -53,13 +47,8 @@ export const accountRouter = createTRPCRouter({
       return url;
     }),
 
-  updateAccount: protectedProcedure
-    .input(
-      z.object({
-        isImage: z.boolean().optional(),
-        name: z.string().min(2).max(100).optional(),
-      })
-    )
+  update: protectedProcedure
+    .input(validationSchema)
     .mutation(async ({ ctx, input }) => {
       const { user } = ctx;
 
@@ -76,7 +65,7 @@ export const accountRouter = createTRPCRouter({
       return ctx.db.select().from(userTable).where(eq(userTable.id, user.id));
     }),
 
-  getAccount: protectedProcedure.query(({ ctx }) => {
+  get: protectedProcedure.query(({ ctx }) => {
     const { user } = ctx;
 
     return ctx.db.select().from(userTable).where(eq(userTable.id, user.id));
