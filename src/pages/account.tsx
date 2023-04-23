@@ -19,6 +19,8 @@ export const validationSchema = z.object({
   name: z.string().min(2).max(100).optional(),
 });
 
+type ValidationSchema = z.infer<typeof validationSchema>;
+
 export const fileExt = "webp";
 
 function useZodForm<TSchema extends z.ZodType>(
@@ -36,7 +38,7 @@ function useZodForm<TSchema extends z.ZodType>(
 
 const AccountPage: NextPage = () => {
   const utils = api.useContext();
-  const { data: session } = useSession();
+  const { data: session, update: updateSession } = useSession();
   const signedUrl = api.account.createSignedAvatarUrl.useMutation();
   const updateAccount = api.account.update.useMutation();
   const getAccount = api.account.get.useQuery(
@@ -53,10 +55,15 @@ const AccountPage: NextPage = () => {
       const blob = await resizeImageBlob(file, `image/${fileExt}`, 200);
       const url = await signedUrl.mutateAsync({ size: blob.size });
       await axios.put(url, blob);
-      updateAccount.mutateAsync(
+      const user = await updateAccount.mutateAsync(
         { isImage: true },
-        { onSuccess: () => utils.account.invalidate() }
+        {
+          onSuccess: () => {
+            utils.account.invalidate();
+          },
+        }
       );
+      updateSession(user);
     } catch (e) {
       console.error(e);
     } finally {
@@ -104,6 +111,7 @@ const AccountPage: NextPage = () => {
           <form
             onSubmit={methods.handleSubmit(async (values) => {
               await updateAccount.mutateAsync(values);
+              updateSession(values);
             })}
             className="space-y-2"
           >
