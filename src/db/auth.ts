@@ -1,3 +1,4 @@
+import { InferModel } from "drizzle-orm";
 import {
   datetime,
   index,
@@ -71,7 +72,6 @@ export const verificationTokenTable = mysqlTable(
   })
 );
 
-
 export const userTable = mysqlTable(
   "user",
   {
@@ -87,8 +87,6 @@ export const userTable = mysqlTable(
     emailIndex: uniqueIndex("user__email__idx").on(user.email),
   })
 );
-
-
 
 export type User = InferModel<typeof userTable>;
 export type NewUser = InferModel<typeof userTable, "insert">;
