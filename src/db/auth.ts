@@ -55,6 +55,23 @@ export const sessionTable = mysqlTable(
   })
 );
 
+export const verificationTokenTable = mysqlTable(
+  "verification_token",
+  {
+    identifier: varchar("identifier", { length: 191 }).primaryKey().notNull(),
+    token: varchar("token", { length: 191 }).notNull(),
+    expires: datetime("expires").notNull(),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+    updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  },
+  (verificationToken) => ({
+    tokenIndex: uniqueIndex("verification_token__token__idx").on(
+      verificationToken.token
+    ),
+  })
+);
+
+
 export const userTable = mysqlTable(
   "user",
   {
@@ -71,18 +88,7 @@ export const userTable = mysqlTable(
   })
 );
 
-export const verificationTokenTable = mysqlTable(
-  "verification_token",
-  {
-    identifier: varchar("identifier", { length: 191 }).primaryKey().notNull(),
-    token: varchar("token", { length: 191 }).notNull(),
-    expires: datetime("expires").notNull(),
-    createdAt: timestamp("createdAt").defaultNow().notNull(),
-    updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
-  },
-  (verificationToken) => ({
-    tokenIndex: uniqueIndex("verification_token__token__idx").on(
-      verificationToken.token
-    ),
-  })
-);
+
+
+export type User = InferModel<typeof userTable>;
+export type NewUser = InferModel<typeof userTable, "insert">;
