@@ -2,13 +2,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, UseFormProps } from "react-hook-form";
 import { z } from "zod";
 
-import { api } from "@/utils/client/api";
-
 // validation schema is used by server
 export const validationSchema = z.object({
   title: z.string().min(2),
   text: z.string().min(5),
 });
+
+type ValidationSchema = z.infer<typeof validationSchema>;
 
 function useZodForm<TSchema extends z.ZodType>(
   props: Omit<UseFormProps<TSchema["_input"]>, "resolver"> & {
@@ -24,12 +24,10 @@ function useZodForm<TSchema extends z.ZodType>(
 }
 
 type Props = {
-  onSuccess: () => void;
+  onSubmit: (values: ValidationSchema) => void;
 };
 
-export default function PostAddScreen({ onSuccess }: Props) {
-  const mutation = api.post.add.useMutation({ onSuccess });
-
+export default function PostAddScreen({ onSubmit }: Props) {
   const methods = useZodForm({
     schema: validationSchema,
     defaultValues: {
@@ -43,7 +41,7 @@ export default function PostAddScreen({ onSuccess }: Props) {
       <h2 className="text-3xl font-bold text-white">Add a post</h2>
       <form
         onSubmit={methods.handleSubmit(async (values) => {
-          await mutation.mutateAsync(values);
+          await onSubmit(values);
           methods.reset();
         })}
         className="space-y-2"
@@ -82,10 +80,10 @@ export default function PostAddScreen({ onSuccess }: Props) {
 
         <button
           type="submit"
-          disabled={mutation.isLoading}
+          disabled={methods.formState.isSubmitting}
           className="m-0 rounded-sm border-black bg-slate-500 p-2 font-bold text-white"
         >
-          {mutation.isLoading ? "Loading" : "Submit"}
+          {methods.formState.isSubmitting ? "Loading" : "Submit"}
         </button>
       </form>
     </div>
