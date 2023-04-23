@@ -6,12 +6,7 @@ import {
   timestamp,
   varchar,
 } from "drizzle-orm/mysql-core";
-
-export const exampleTable = mysqlTable("example", {
-  id: varchar("id", { length: 191 }).primaryKey().notNull(),
-  createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
-});
+import { InferModel } from "drizzle-orm";
 
 export const postTable = mysqlTable(
   "post",
@@ -29,3 +24,6 @@ export const postTable = mysqlTable(
     userIdIndex: index("post__userId__idx").on(post.userId),
   })
 );
+
+export type Post = InferModel<typeof postTable>;
+export type NewPost = InferModel<typeof postTable, "insert">;

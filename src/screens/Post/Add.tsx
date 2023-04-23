@@ -1,7 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, UseFormProps } from "react-hook-form";
-import { api } from "@/utils/client/api";
 import { z } from "zod";
+
+import { api } from "@/utils/client/api";
 
 // validation schema is used by server
 export const validationSchema = z.object({
@@ -22,19 +23,12 @@ function useZodForm<TSchema extends z.ZodType>(
   return form;
 }
 
-export default function PostScreen() {
-  const utils = api.useContext().post;
-  const query = api.post.list.useQuery(undefined, {
-    suspense: true,
-  });
+type Props = {
+  onSuccess: () => void;
+};
 
-  const posts = query.data;
-
-  const mutation = api.post.add.useMutation({
-    onSuccess: async () => {
-      await utils.list.invalidate();
-    },
-  });
+export default function PostAddScreen({ onSuccess }: Props) {
+  const mutation = api.post.add.useMutation({ onSuccess });
 
   const methods = useZodForm({
     schema: validationSchema,
@@ -45,26 +39,8 @@ export default function PostScreen() {
   });
 
   return (
-    <>
-      <h2 className="text-3xl font-bold">Posts</h2>
-
-      <div className="flex flex-col gap-2 py-2">
-        {posts &&
-          posts.map((post) => (
-            <article
-              key={post.id}
-              className="overflow-hidden bg-white p-4 shadow sm:rounded-lg"
-            >
-              <small>
-                <b>{post.slug}</b>
-              </small>
-              <h3 className="text-xl font-bold">{post.title}</h3>
-              <p className="my-2">{post.text}</p>
-            </article>
-          ))}
-      </div>
-
-      <h2 className="text-2xl font-bold">Add a post</h2>
+    <div className="flex w-full max-w-xs flex-col gap-2 py-2">
+      <h2 className="text-3xl font-bold text-white">Add a post</h2>
       <form
         onSubmit={methods.handleSubmit(async (values) => {
           await mutation.mutateAsync(values);
@@ -74,9 +50,12 @@ export default function PostScreen() {
       >
         <div>
           <label>
-            Title
+            <span className="text-white">Title</span>
             <br />
-            <input {...methods.register("title")} className="border" />
+            <input
+              {...methods.register("title")}
+              className="w-full border p-1"
+            />
           </label>
 
           {methods.formState.errors.title?.message && (
@@ -87,9 +66,12 @@ export default function PostScreen() {
         </div>
         <div>
           <label>
-            Text
+            <span className="text-white">Text</span>
             <br />
-            <textarea {...methods.register("text")} className="border" />
+            <textarea
+              {...methods.register("text")}
+              className="w-full border p-1"
+            />
           </label>
           {methods.formState.errors.text?.message && (
             <p className="text-red-700">
@@ -106,6 +88,6 @@ export default function PostScreen() {
           {mutation.isLoading ? "Loading" : "Submit"}
         </button>
       </form>
-    </>
+    </div>
   );
 }

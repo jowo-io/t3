@@ -8,19 +8,11 @@ import {
 
 import { postTable } from "@/db/schema";
 
-import { validationSchema } from "@/screens/Post/Post";
+import { validationSchema } from "@/screens/Post/Add";
 import cuid from "cuid";
 import { and, eq } from "drizzle-orm";
 
 export const postRouter = createTRPCRouter({
-  hello: publicProcedure
-    .input(z.object({ text: z.string() }))
-    .query(({ input }) => {
-      return {
-        greeting: `Hello ${input.text}`,
-      };
-    }),
-
   add: protectedProcedure
     .input(validationSchema)
     .mutation(async ({ ctx, input }) => {
@@ -47,17 +39,9 @@ export const postRouter = createTRPCRouter({
       return db.select().from(postTable).where(eq(postTable.id, id));
     }),
 
-  list: protectedProcedure.query(({ ctx }) => {
-    const { db, session } = ctx;
-    const { user } = session;
+  list: publicProcedure.query(({ ctx }) => {
+    const { db } = ctx;
 
-    return db
-      .select()
-      .from(postTable)
-      .where(and(eq(postTable.userId, user.id), eq(postTable.published, true)));
-  }),
-
-  getSecretMessage: protectedProcedure.query(() => {
-    return "you can now see this secret message!";
+    return db.select().from(postTable).where(eq(postTable.published, true));
   }),
 });
