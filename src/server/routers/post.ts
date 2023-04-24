@@ -10,7 +10,7 @@ import { userTable, postTable } from "@/db";
 
 import { validationSchema } from "@/screens/Post/Add";
 import cuid from "cuid";
-import { eq, desc } from "drizzle-orm";
+import { eq, desc, sql } from "drizzle-orm";
 
 export const postRouter = createTRPCRouter({
   add: protectedProcedure
@@ -42,26 +42,57 @@ export const postRouter = createTRPCRouter({
       return db.select().from(postTable).where(eq(postTable.id, id));
     }),
 
-  list: publicProcedure.query(async ({ ctx }) => {
-    const { db } = ctx;
+  list: publicProcedure
+    .input(
+      z
+        .object({
+          page: z.number().int().nonnegative().finite().optional().default(0),
+          resultsPerPage: z
+            .number()
+            .int()
+            .nonnegative()
+            .max(20)
+            .optional()
+            .default(3),
+        })
+        .optional()
+        .default({})
+    )
+    .query(async ({ ctx, input }) => {
+      const { db } = ctx;
+      const { page, resultsPerPage } = input;
 
-    return await db
-      .select({
-        post: {
-          id: postTable.id,
-          title: postTable.title,
-          summary: postTable.summary,
-          slug: postTable.slug,
-        },
-        user: {
-          id: userTable.id,
-          name: userTable.name,
-          image: userTable.image,
-        },
-      })
-      .from(postTable)
-      .orderBy(desc(postTable.createdAt))
-      .where(eq(postTable.published, true))
-      .leftJoin(userTable, eq(userTable.id, postTable.userId));
-  }),
+      const where = eq(postTable.published, true);
+
+      const count = (
+        await db
+          .select({ count: sql`count(*)` })
+          .from(postTable)
+          .where(where)
+      )?.pop()?.count as number;
+
+      const pages = Math.ceil(count / resultsPerPage);
+
+      const results = await db
+        .select({
+          post: {
+            id: postTable.id,
+            title: postTable.title,
+            summary: postTable.summary,
+            slug: postTable.slug,
+          },
+          user: {
+            id: userTable.id,
+            name: userTable.name,
+            image: userTable.image,
+          },
+        })
+        .from(postTable)
+        .limit(resultsPerPage)
+        .offset(page * resultsPerPage)
+        .orderBy(desc(postTable.createdAt))
+        .where(where)
+        .leftJoin(userTable, eq(userTable.id, postTable.userId));
+      return { results, count, pages, page, resultsPerPage };
+    }),
 });

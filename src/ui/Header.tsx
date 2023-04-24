@@ -9,6 +9,10 @@ const Header: React.FC = () => {
   return (
     <div className="mb-5 flex w-full flex-row justify-between gap-2">
       <div className="flex flex-row items-center gap-2">
+        <Link className="text-white" href="/">
+          Home
+        </Link>
+        <b className="text-white">|</b>
         <Link className="text-white" href="/post">
           Posts
         </Link>

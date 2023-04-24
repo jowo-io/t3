@@ -50,12 +50,14 @@ s3ninja / localstack
 upstash
 clerk.com
 axiom.co
+
 radix-ui.com
 ui.shadcn.com
 
+migrations
+
 ##### To do
 
-pagination
 storybook
 atomic ui kit
 next i18n

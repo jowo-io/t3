@@ -1,13 +1,15 @@
 import Link from "next/link";
 
+import Pagination from "@/ui/Pagination";
 import { RouterOutputs } from "@/utils/client/api";
 import { env } from "@/env.mjs";
 
 type Props = {
   data?: RouterOutputs["post"]["list"];
+  onChangePage: (page: number) => void;
 };
 
-export default function PostListScreen({ data }: Props) {
+export default function PostListScreen({ data, onChangePage }: Props) {
   return (
     <>
       <div className="flex h-9 w-full max-w-xs justify-between">
@@ -19,7 +21,7 @@ export default function PostListScreen({ data }: Props) {
 
       <div className="flex w-full max-w-xs flex-col gap-2 py-2">
         {data &&
-          data.map(({ post, user }) => (
+          data.results.map(({ post, user }) => (
             <Link key={post.id} href={`/post/view/${post.id}`}>
               <article className="overflow-hidden bg-white p-4 shadow sm:rounded-lg">
                 <small>
@@ -43,6 +45,14 @@ export default function PostListScreen({ data }: Props) {
             </Link>
           ))}
       </div>
+
+      <Pagination
+        pages={data?.pages || 0}
+        page={data?.page || 0}
+        resultsPerPage={data?.resultsPerPage || 0}
+        count={data?.count || 0}
+        onChange={onChangePage}
+      />
     </>
   );
 }
