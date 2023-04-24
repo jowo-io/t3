@@ -7,7 +7,7 @@ import {
   sessionTable,
   userTable,
   verificationTokenTable,
-} from "@/db/auth";
+} from "@/db";
 
 export function DrizzleAdapter(db: MySql2Database): Adapter {
   return {

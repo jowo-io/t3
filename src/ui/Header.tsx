@@ -31,7 +31,7 @@ const Header: React.FC = () => {
           )}
         </p>
         {sessionData?.user?.image && (
-          <div className="flex h-10 w-10 justify-center overflow-hidden rounded-full  p-1 align-middle">
+          <div className="flex h-10 w-10 items-center justify-center overflow-hidden  rounded-full p-1">
             <img
               src={env.NEXT_PUBLIC_STORAGE_URL + sessionData.user?.image}
               alt="Avatar image"

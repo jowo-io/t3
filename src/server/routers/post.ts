@@ -6,11 +6,11 @@ import {
   protectedProcedure,
 } from "@/server/trpc";
 
-import { postTable } from "@/db/schema";
+import { userTable, postTable } from "@/db";
 
 import { validationSchema } from "@/screens/Post/Add";
 import cuid from "cuid";
-import { and, eq } from "drizzle-orm";
+import { eq, desc } from "drizzle-orm";
 
 export const postRouter = createTRPCRouter({
   add: protectedProcedure
@@ -39,9 +39,26 @@ export const postRouter = createTRPCRouter({
       return db.select().from(postTable).where(eq(postTable.id, id));
     }),
 
-  list: publicProcedure.query(({ ctx }) => {
+  list: publicProcedure.query(async ({ ctx }) => {
     const { db } = ctx;
 
-    return db.select().from(postTable).where(eq(postTable.published, true));
+    return await db
+      .select({
+        post: {
+          id: postTable.id,
+          title: postTable.title,
+          text: postTable.text,
+          slug: postTable.slug,
+        },
+        user: {
+          id: userTable.id,
+          name: userTable.name,
+          image: userTable.image,
+        },
+      })
+      .from(postTable)
+      .orderBy(desc(postTable.createdAt))
+      .where(eq(postTable.published, true))
+      .leftJoin(userTable, eq(userTable.id, postTable.userId));
   }),
 });

@@ -1,10 +1,12 @@
-import { Post } from "@/db/schema";
+import { Post, User } from "@/db";
+import { env } from "@/env.mjs";
 
 type Props = {
-  post?: Post;
+  post?: Partial<Post>;
+  user?: Partial<User>;
 };
 
-export default function PostViewScreen({ post }: Props) {
+export default function PostViewScreen({ post, user }: Props) {
   if (!post) {
     return <>Post could not be found</>;
   }
@@ -18,11 +20,24 @@ export default function PostViewScreen({ post }: Props) {
           key={post.id}
           className="overflow-hidden bg-white p-4 shadow sm:rounded-lg"
         >
-          <small>
+          <small className="flex w-full flex-row items-center justify-between">
             <b>{post.slug}</b>
+            {!post.published && <i>Draft</i>}
           </small>
-          <h3 className="text-xl font-bold">{post.title}</h3>
+
           <p className="my-2">{post.text}</p>
+
+          <div className="flex w-full flex-row items-center justify-start">
+            {user?.image && (
+              <div className="flex h-8 w-8 items-center justify-center overflow-hidden  rounded-full p-1">
+                <img
+                  src={env.NEXT_PUBLIC_STORAGE_URL + user?.image}
+                  alt="Avatar image"
+                />
+              </div>
+            )}
+            <small>By {user?.name || "anonymous"}</small>
+          </div>
         </article>
       </div>
     </div>

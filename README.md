@@ -48,13 +48,23 @@ s3ninja / localstack
 ### To investigate:
 
 upstash
-planetscale
-graphql
 clerk.com
 axiom.co
 radix-ui.com
 ui.shadcn.com
+
+##### To do
+
+pagination
+storybook
+atomic ui kit
 next i18n
+next-auth roles (see UserRole type)
+page templates
+loading states
+SEO
+boolean names (post.published)
+shared validationSchema
 
 # Install
 

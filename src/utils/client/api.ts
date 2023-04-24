@@ -8,7 +8,7 @@ import { type AppRouter } from "@/server/routers";
 import { getBaseUrl } from "@/utils/isomorphic/url";
 
 import { env } from "@/env.mjs";
-console.log(env.NODE_ENV);
+
 export const api = createTRPCNext<AppRouter>({
   config() {
     return {
@@ -32,3 +32,4 @@ export const api = createTRPCNext<AppRouter>({
 export type RouterInputs = inferRouterInputs<AppRouter>;
 
 export type RouterOutputs = inferRouterOutputs<AppRouter>;
+

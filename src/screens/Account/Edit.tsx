@@ -4,7 +4,7 @@ import { useForm, UseFormProps } from "react-hook-form";
 import { z } from "zod";
 
 import { env } from "@/env.mjs";
-import { User } from "@/db/auth";
+import { User } from "@/db";
 
 export const fileExt = "webp";
 
