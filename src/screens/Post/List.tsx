@@ -26,7 +26,7 @@ export default function PostListScreen({ data }: Props) {
                   <b>{post.slug}</b>
                 </small>
                 <h3 className="text-xl font-bold">{post.title}</h3>
-                <p className="my-2">{post.text}</p>
+                <p className="my-2">{post.summary}</p>
 
                 <div className="flex w-full flex-row items-center justify-start">
                   {user?.image && (

@@ -25,15 +25,18 @@ export const postRouter = createTRPCRouter({
         .split(" ")
         .join("-");
 
+      const summary = input.text.substring(0, 100);
+
       const id = cuid();
 
       await db.insert(postTable).values({
         id,
         userId: user.id,
         published: true,
-        slug,
         title: input.title,
         text: input.text,
+        summary,
+        slug,
       });
 
       return db.select().from(postTable).where(eq(postTable.id, id));
@@ -47,7 +50,7 @@ export const postRouter = createTRPCRouter({
         post: {
           id: postTable.id,
           title: postTable.title,
-          text: postTable.text,
+          summary: postTable.summary,
           slug: postTable.slug,
         },
         user: {

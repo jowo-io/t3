@@ -17,6 +17,7 @@ export const postTable = mysqlTable(
     slug: varchar("slug", { length: 191 }).notNull(),
     title: text("title").notNull(),
     text: text("text").notNull(),
+    summary: text("summary").notNull(),
     createdAt: timestamp("createdAt").defaultNow().notNull(),
     updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
   },

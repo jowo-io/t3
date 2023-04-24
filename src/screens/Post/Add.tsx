@@ -4,8 +4,8 @@ import { z } from "zod";
 
 // validation schema is used by server
 export const validationSchema = z.object({
-  title: z.string().min(2),
-  text: z.string().min(5),
+  title: z.string().min(2).max(200),
+  text: z.string().min(5).max(5000),
 });
 
 type ValidationSchema = z.infer<typeof validationSchema>;

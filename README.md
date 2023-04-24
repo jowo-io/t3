@@ -65,6 +65,8 @@ loading states
 SEO
 boolean names (post.published)
 shared validationSchema
+nanoid vs cuid
+add dates to posts (date formatting)
 
 # Install
 
