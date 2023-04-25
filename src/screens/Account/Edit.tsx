@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, UseFormProps } from "react-hook-form";
 import { z } from "zod";
 
+import Button from "@/ui/Button";
 import { env } from "@/env.mjs";
 import { User } from "@/db";
 
@@ -112,13 +113,9 @@ const AccountEditScreen = ({ onSubmit, onUpload, account }: Props) => {
           )}
         </div>
 
-        <button
-          type="submit"
-          disabled={methods.formState.isSubmitting}
-          className="m-0 rounded-sm border-black bg-slate-500 p-2 font-bold text-white"
-        >
+        <Button type="submit" disabled={methods.formState.isSubmitting}>
           {methods.formState.isSubmitting ? "Loading" : "Submit"}
-        </button>
+        </Button>
       </form>
     </div>
   );
