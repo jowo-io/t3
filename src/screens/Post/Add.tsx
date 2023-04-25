@@ -1,3 +1,5 @@
+import Button from "@/ui/Button";
+import Spinner from "@/ui/Spinner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, UseFormProps } from "react-hook-form";
 import { z } from "zod";
@@ -78,13 +80,13 @@ export default function PostAddScreen({ onSubmit }: Props) {
           )}
         </div>
 
-        <button
-          type="submit"
-          disabled={methods.formState.isSubmitting}
-          className="m-0 rounded-sm border-black bg-slate-500 p-2 font-bold text-white"
-        >
-          {methods.formState.isSubmitting ? "Loading" : "Submit"}
-        </button>
+        <Button type="submit" disabled={methods.formState.isSubmitting}>
+          {methods.formState.isSubmitting ? (
+            <Spinner size="small" intent="secondary" />
+          ) : (
+            "Submit"
+          )}
+        </Button>
       </form>
     </div>
   );

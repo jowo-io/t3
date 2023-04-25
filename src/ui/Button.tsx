@@ -1,7 +1,7 @@
 import React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 
-const button = cva("button", {
+const button = cva(["button", "flex", "justify-center", "items-center"], {
   variants: {
     intent: {
       primary: [
@@ -18,8 +18,8 @@ const button = cva("button", {
       ],
     },
     size: {
-      small: ["text-sm", "rounded-md", "py-1", "px-2"],
-      medium: ["text-base", "rounded-lg", "py-2", "px-4"],
+      small: ["text-sm", "rounded-md", "py-1", "px-2", "h-6"],
+      medium: ["text-base", "rounded-lg", "py-2", "px-6", "h-10"],
     },
   },
   compoundVariants: [{ intent: "primary", size: "medium", class: "font-bold" }],

@@ -2,6 +2,7 @@ import { useState } from "react";
 import Header from "@/ui/Header";
 import PostListScreen from "@/screens/Post/List";
 import { api } from "@/utils/client/api";
+import Spinner from "@/ui/Spinner";
 
 export default function PostsPage() {
   const [page, setPage] = useState(0);
@@ -12,7 +13,7 @@ export default function PostsPage() {
       <Header />
       <div className="flex flex-col items-center gap-2">
         {isLoading ? (
-          "Loading..."
+          <Spinner />
         ) : (
           <PostListScreen data={data} onChangePage={setPage} />
         )}

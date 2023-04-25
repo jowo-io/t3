@@ -6,6 +6,7 @@ import { z } from "zod";
 import Button from "@/ui/Button";
 import { env } from "@/env.mjs";
 import { User } from "@/db";
+import Spinner from "@/ui/Spinner";
 
 export const fileExt = "webp";
 
@@ -46,7 +47,7 @@ const AccountEditScreen = ({ onSubmit, onUpload, account }: Props) => {
   }, [account?.name]);
 
   if (!account) {
-    return <>Loading...</>;
+    return <Spinner />;
   }
 
   return (
@@ -114,7 +115,11 @@ const AccountEditScreen = ({ onSubmit, onUpload, account }: Props) => {
         </div>
 
         <Button type="submit" disabled={methods.formState.isSubmitting}>
-          {methods.formState.isSubmitting ? "Loading" : "Submit"}
+          {methods.formState.isSubmitting ? (
+            <Spinner size="small" intent="secondary" />
+          ) : (
+            "Submit"
+          )}
         </Button>
       </form>
     </div>
