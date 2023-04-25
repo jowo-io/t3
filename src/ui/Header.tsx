@@ -1,6 +1,7 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
+import Button from "@/ui/Button";
 import { env } from "@/env.mjs";
 
 const Header: React.FC = () => {
@@ -28,26 +29,27 @@ const Header: React.FC = () => {
 
       <div className="flex flex-row items-center gap-2">
         <p className="text-center text-white">
-          {sessionData && (
+          {sessionData?.user?.name && (
             <span>
               Logged in as <b>{sessionData.user?.name}</b>
             </span>
           )}
         </p>
         {sessionData?.user?.image && (
-          <div className="flex h-10 w-10 items-center justify-center overflow-hidden  rounded-full p-1">
+          <div className="flex h-9 w-9 items-center justify-center overflow-hidden  rounded-full p-1">
             <img
               src={env.NEXT_PUBLIC_STORAGE_URL + sessionData.user?.image}
               alt="Avatar image"
             />
           </div>
         )}
-        <button
-          className="rounded-full bg-white/10 px-4 py-2 font-semibold text-white no-underline transition hover:bg-white/20"
+        <Button
           onClick={sessionData ? () => void signOut() : () => void signIn()}
+          size="small"
+          intent="secondary"
         >
           {sessionData ? "Sign out" : "Sign in"}
-        </button>
+        </Button>
       </div>
     </div>
   );

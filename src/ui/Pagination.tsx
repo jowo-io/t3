@@ -33,7 +33,7 @@ export default function Pagination({
   const isNext = page < pages - 1;
 
   return (
-    <div className="px-4 py-3 sm:px-6">
+    <div className="px-4 py-3">
       <div className="pb-3 text-center">
         <p className="text-sm text-white">
           Showing{" "}
@@ -44,7 +44,7 @@ export default function Pagination({
           of <span className="font-medium">{count}</span> results
         </p>
       </div>
-      <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+      <div className="flex flex-1 items-center justify-between">
         <div>
           <nav
             className="isolate inline-flex -space-x-px rounded-md bg-white shadow-sm "
