@@ -58,6 +58,7 @@ migrations
 
 ##### To do
 
+read clean code
 storybook
 atomic ui kit
 next i18n
@@ -69,6 +70,7 @@ boolean names (post.published)
 shared validationSchema
 nanoid vs cuid
 add dates to posts (date formatting)
+lightning auth: https://github.com/silencesoft/lightning-next-auth-example
 
 # Install
 
