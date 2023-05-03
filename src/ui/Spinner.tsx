@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC, HTMLAttributes } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 
 const spinner = cva([], {
@@ -19,16 +19,11 @@ const spinner = cva([], {
   },
 });
 
-export interface SpinnerProps
-  extends React.HTMLAttributes<HTMLElement>,
+interface Props
+  extends HTMLAttributes<HTMLElement>,
     VariantProps<typeof spinner> {}
 
-const Spinner: React.FC<SpinnerProps> = ({
-  className,
-  intent,
-  size,
-  ...props
-}) => {
+export default function Spinner({ className, intent, size, ...props }: Props) {
   return (
     <span role="status" {...props}>
       <svg
@@ -50,6 +45,4 @@ const Spinner: React.FC<SpinnerProps> = ({
       <span className="sr-only">Loading...</span>
     </span>
   );
-};
-
-export default Spinner;
+}

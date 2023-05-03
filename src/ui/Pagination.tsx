@@ -1,4 +1,5 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
+import { repeat } from "@/utils/isomorphic/array";
 
 type Props = {
   page: number;
@@ -6,20 +7,6 @@ type Props = {
   resultsPerPage: number;
   count: number;
   onChange: (page: number) => void;
-};
-
-export const repeat = (
-  callback: (i: number, max: number) => any,
-  max: number
-) => {
-  let arr = [];
-  for (let i = 0; i < max; i++) {
-    const returnValue = callback(i, max);
-    if (returnValue) {
-      arr.push(returnValue);
-    }
-  }
-  return arr;
 };
 
 export default function Pagination({

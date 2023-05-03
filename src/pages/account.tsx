@@ -1,17 +1,13 @@
+import React, { PropsWithChildren, BaseSyntheticEvent } from "react";
 import { useSession } from "next-auth/react";
-import { BaseSyntheticEvent } from "react";
-
-import { type NextPage } from "next";
 import axios from "axios";
 
 import { api } from "@/utils/client/api";
 import { resizeImageBlob } from "@/utils/client/pica";
-
-import Header from "@/ui/Header";
-
+import BasicTemplate from "@/ui/templates/Basic";
 import AccountEditScreen, { fileExt } from "@/screens/Account/Edit";
 
-const AccountPage: NextPage = () => {
+export default function AccountPage({}: PropsWithChildren) {
   const utils = api.useContext();
   const { data: session, update: updateSession } = useSession();
   const signedUrl = api.account.createSignedAvatarUrl.useMutation();
@@ -38,24 +34,19 @@ const AccountPage: NextPage = () => {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#2e026d] to-[#15162c] p-4">
-      <Header />
-      <div className="flex flex-col items-center gap-2">
-        <AccountEditScreen
-          onSubmit={async (values) => {
-            const user = await updateAccount.mutateAsync(values, {
-              onSuccess: () => {
-                updateSession(user);
-                utils.account.invalidate();
-              },
-            });
-          }}
-          onUpload={onUpload}
-          account={account}
-        />
-      </div>
-    </main>
+    <BasicTemplate>
+      <AccountEditScreen
+        onSubmit={async (values) => {
+          const user = await updateAccount.mutateAsync(values, {
+            onSuccess: () => {
+              updateSession(user);
+              utils.account.invalidate();
+            },
+          });
+        }}
+        onUpload={onUpload}
+        account={account}
+      />
+    </BasicTemplate>
   );
-};
-
-export default AccountPage;
+}

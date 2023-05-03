@@ -1,7 +1,8 @@
+import React from "react";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
-import { eq, and } from "drizzle-orm/expressions";
+import { eq } from "drizzle-orm/expressions";
 
-import Header from "@/ui/Header";
+import BasicTemplate from "@/ui/templates/Basic";
 import { getServerAuthSession } from "@/server/auth";
 import { db } from "@/server/db";
 import { postTable, userTable } from "@/db";
@@ -45,16 +46,13 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   return { props: {} };
 };
 
-export default function PostsPage({
+export default function ViewPostPage({
   post,
   user,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#2e026d] to-[#15162c] p-4">
-      <Header />
-      <div className="flex flex-col items-center gap-2">
-        <PostViewScreen post={post} user={user} />
-      </div>
-    </main>
+    <BasicTemplate>
+      <PostViewScreen post={post} user={user} />
+    </BasicTemplate>
   );
 }

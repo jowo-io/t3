@@ -4,7 +4,9 @@ import Link from "next/link";
 import Button from "@/ui/Button";
 import { env } from "@/env.mjs";
 
-const Header: React.FC = () => {
+type Props = {};
+
+export default function Header({}: Props) {
   const { data: sessionData } = useSession();
 
   return (
@@ -53,6 +55,4 @@ const Header: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default Header;
+}
