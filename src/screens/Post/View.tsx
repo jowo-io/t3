@@ -36,8 +36,8 @@ export default function PostViewScreen({ post, user }: Props) {
                 />
               </div>
             )}
-            <small>By {user?.name || "anonymous"}</small>
           </div>
+          <small>By {user?.name || "anonymous"}</small>
         </article>
       </div>
     </div>
