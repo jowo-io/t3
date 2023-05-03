@@ -33,14 +33,11 @@ export default function PostListScreen({ data, onChangePage }: Props) {
                 <div className="flex w-full flex-row items-center justify-start">
                   {user?.image && (
                     <div className="flex h-8 w-8 items-center justify-center overflow-hidden  rounded-full p-1">
-                      <img
-                        src={env.NEXT_PUBLIC_STORAGE_URL + user?.image}
-                        alt="Avatar image"
-                      />
+                      <img src={env.NEXT_PUBLIC_STORAGE_URL + user?.image} />
                     </div>
                   )}
-                  <small>By {user?.name || "anonymous"}</small>
                 </div>
+                <small>By {user?.name || "anonymous"}</small>
               </article>
             </Link>
           ))}
