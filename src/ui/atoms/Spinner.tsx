@@ -5,7 +5,7 @@ const spinner = cva([], {
   variants: {
     intent: {
       primary: ["fill-blue-600", "text-gray-200", "animate-spin"],
-      secondary: ["fill-blue-600", "text-white-200", "animate-spin"],
+      secondary: ["fill-blue-600", "text-white", "animate-spin"],
     },
     size: {
       small: ["w-4", "h-4"],
