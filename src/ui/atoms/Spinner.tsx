@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes } from "react";
+import React, { HTMLAttributes } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 
 const spinner = cva([], {
