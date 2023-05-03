@@ -7,7 +7,7 @@ import BasicTemplate from "@/ui/templates/Basic";
 import PostAddScreen from "@/screens/Post/Add";
 
 export default function AddPostPage({}: PropsWithChildren) {
-  const { data: session, ...rest } = useSession();
+  const { data: session } = useSession();
   const { push } = useRouter();
 
   const mutation = api.post.add.useMutation({ onSuccess: () => push("/post") });
@@ -21,7 +21,7 @@ export default function AddPostPage({}: PropsWithChildren) {
           }}
         />
       ) : (
-        "Please login to see this page"
+        <div className="text-white">Please login to see this page</div>
       )}
     </BasicTemplate>
   );

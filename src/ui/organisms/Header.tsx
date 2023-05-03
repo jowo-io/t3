@@ -7,7 +7,7 @@ import { env } from "@/env.mjs";
 type Props = {};
 
 export default function Header({}: Props) {
-  const { data: sessionData } = useSession();
+  const { data: session } = useSession();
 
   return (
     <div className="mb-5 flex w-full flex-row justify-between gap-2">
@@ -19,7 +19,7 @@ export default function Header({}: Props) {
         <Link className="text-white" href="/post">
           Posts
         </Link>
-        {sessionData && (
+        {session && (
           <>
             <b className="text-white">|</b>
             <Link className="text-white" href="/account">
@@ -31,26 +31,26 @@ export default function Header({}: Props) {
 
       <div className="flex flex-row items-center gap-2">
         <p className="text-center text-white">
-          {sessionData?.user?.name && (
+          {session?.user?.name && (
             <span>
-              Logged in as <b>{sessionData.user?.name}</b>
+              Logged in as <b>{session.user?.name}</b>
             </span>
           )}
         </p>
-        {sessionData?.user?.image && (
+        {session?.user?.image && (
           <div className="flex h-9 w-9 items-center justify-center overflow-hidden  rounded-full p-1">
             <img
-              src={env.NEXT_PUBLIC_STORAGE_URL + sessionData.user?.image}
+              src={env.NEXT_PUBLIC_STORAGE_URL + session.user?.image}
               alt="Avatar image"
             />
           </div>
         )}
         <Button
-          onClick={sessionData ? () => void signOut() : () => void signIn()}
+          onClick={session ? () => void signOut() : () => void signIn()}
           size="small"
           intent="secondary"
         >
-          {sessionData ? "Sign out" : "Sign in"}
+          {session ? "Sign out" : "Sign in"}
         </Button>
       </div>
     </div>
