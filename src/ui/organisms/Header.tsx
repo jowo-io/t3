@@ -1,7 +1,7 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
-import Button from "@/ui/Button";
+import Button from "@/ui/atoms/Button";
 import { env } from "@/env.mjs";
 
 type Props = {};

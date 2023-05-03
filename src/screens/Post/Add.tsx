@@ -1,5 +1,5 @@
-import Button from "@/ui/Button";
-import Spinner from "@/ui/Spinner";
+import Button from "@/ui/atoms/Button";
+import Spinner from "@/ui/atoms/Spinner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, UseFormProps } from "react-hook-form";
 import { z } from "zod";

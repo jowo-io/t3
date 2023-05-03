@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import Pagination from "@/ui/Pagination";
+import Pagination from "@/ui/molecules/Pagination";
 import { RouterOutputs } from "@/utils/client/api";
 import { env } from "@/env.mjs";
 
