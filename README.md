@@ -59,15 +59,13 @@ migrations
 ##### To do
 
 read clean code
+add search input in posts page
 storybook
 next i18n
 next-auth roles (see UserRole type)
-page templates
-loading states
 SEO
 boolean names (post.published)
 shared validationSchema
-nanoid vs cuid
 lightning auth: https://github.com/silencesoft/lightning-next-auth-example
 
 # Install

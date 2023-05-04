@@ -10,11 +10,13 @@ import {
   varchar,
 } from "drizzle-orm/mysql-core";
 
+import { idLength } from "@/utils/isomorphic/id";
+
 export const accountTable = mysqlTable(
   "account",
   {
-    id: varchar("id", { length: 191 }).primaryKey().notNull(),
-    userId: varchar("userId", { length: 191 }).notNull(),
+    id: varchar("id", { length: idLength }).primaryKey().notNull(),
+    userId: varchar("userId", { length: idLength }).notNull(),
     type: varchar("type", { length: 191 }).notNull(),
     provider: varchar("provider", { length: 191 }).notNull(),
     providerAccountId: varchar("providerAccountId", { length: 191 }).notNull(),
@@ -41,9 +43,9 @@ export const accountTable = mysqlTable(
 export const sessionTable = mysqlTable(
   "session",
   {
-    id: varchar("id", { length: 191 }).primaryKey().notNull(),
+    id: varchar("id", { length: idLength }).primaryKey().notNull(),
     sessionToken: varchar("sessionToken", { length: 191 }).notNull(),
-    userId: varchar("userId", { length: 191 }).notNull(),
+    userId: varchar("userId", { length: idLength }).notNull(),
     expires: datetime("expires").notNull(),
     createdAt: timestamp("createdAt").defaultNow().notNull(),
     updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
@@ -75,7 +77,7 @@ export const verificationTokenTable = mysqlTable(
 export const userTable = mysqlTable(
   "user",
   {
-    id: varchar("id", { length: 191 }).primaryKey().notNull(),
+    id: varchar("id", { length: idLength }).primaryKey().notNull(),
     name: varchar("name", { length: 191 }),
     email: varchar("email", { length: 191 }).notNull(),
     emailVerified: timestamp("emailVerified"),

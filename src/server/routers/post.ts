@@ -9,7 +9,7 @@ import {
 import { userTable, postTable } from "@/db";
 
 import { validationSchema } from "@/screens/Post/Add";
-import cuid from "cuid";
+import { createId } from "@/utils/isomorphic/id";
 import { eq, desc, sql } from "drizzle-orm";
 
 export const postRouter = createTRPCRouter({
@@ -23,11 +23,12 @@ export const postRouter = createTRPCRouter({
         .trim()
         .toLowerCase()
         .split(" ")
-        .join("-");
+        .join("-")
+        .substring(0, 191);
 
       const summary = input.text.substring(0, 100);
 
-      const id = cuid();
+      const id = createId();
 
       await db.insert(postTable).values({
         id,

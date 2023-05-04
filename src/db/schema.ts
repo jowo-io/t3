@@ -8,11 +8,13 @@ import {
 } from "drizzle-orm/mysql-core";
 import { InferModel } from "drizzle-orm";
 
+import { idLength } from "@/utils/isomorphic/id";
+
 export const postTable = mysqlTable(
   "post",
   {
-    id: varchar("id", { length: 191 }).primaryKey().notNull(),
-    userId: varchar("userId", { length: 191 }).notNull(),
+    id: varchar("id", { length: idLength }).primaryKey().notNull(),
+    userId: varchar("userId", { length: idLength }).notNull(),
     published: boolean("published").notNull(),
     slug: varchar("slug", { length: 191 }).notNull(),
     title: text("title").notNull(),
