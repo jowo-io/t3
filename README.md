@@ -110,3 +110,15 @@ Cors rules must be added (WIP):
   }
 ]
 ```
+
+# Local network
+
+The `npm run dev` development script is made available on the local IP. You can find it by running `ipconfig` in the command line.
+
+```
+$ ipconfig
+```
+
+Then look for the `Wireless LAN adapter Wi-Fi` section under the `IPv4 Address` section.
+
+Be sure to update the `NEXTAUTH_URL` in the `.env` file too!
