@@ -3,7 +3,7 @@ import Header from "@/ui/organisms/Header";
 
 interface Props extends PropsWithChildren {}
 
-export default function BasicTemplate({ children }: Props) {
+export default function BasicLayout({ children }: Props) {
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#2e026d] to-[#15162c] p-4">
       <Header />
