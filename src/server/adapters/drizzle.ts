@@ -17,6 +17,7 @@ export function DrizzleAdapter(db: MySql2Database): Adapter {
         id: createId(),
         email: userData.email,
         emailVerified: userData.emailVerified,
+        role: "user",
         name: userData.name,
         image: userData.image,
       });

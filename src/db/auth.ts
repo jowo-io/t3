@@ -82,6 +82,7 @@ export const userTable = mysqlTable(
     email: varchar("email", { length: 191 }).notNull(),
     emailVerified: timestamp("emailVerified"),
     image: varchar("image", { length: 191 }),
+    role: varchar("role", { length: 191 }).notNull(),
     createdAt: timestamp("createdAt").defaultNow().notNull(),
     updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
   },
