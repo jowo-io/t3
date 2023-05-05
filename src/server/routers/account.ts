@@ -51,8 +51,7 @@ export const accountRouter = createTRPCRouter({
       const data: { image?: string; name?: string } = {};
       if (input.isImage) {
         data.image = replaceVersionQueryParam(getAvatarPath(user.id));
-      }
-      if (input.name) {
+      } else {
         data.name = input.name;
       }
 

@@ -13,7 +13,7 @@ export const fileExt = "webp";
 // validation schema is used by server
 export const validationSchema = z.object({
   isImage: z.boolean().optional(),
-  name: z.string().min(2).max(100).optional(),
+  name: z.string().max(25).optional(),
 });
 
 type ValidationSchema = z.infer<typeof validationSchema>;
