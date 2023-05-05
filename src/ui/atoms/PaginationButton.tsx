@@ -16,7 +16,7 @@ const paginationButton = cva(["px-2", "py-2"], {
   },
 });
 
-export interface PaginationButtonProps
+interface Props
   extends ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof paginationButton> {}
 
@@ -26,7 +26,7 @@ export default function PaginationButton({
   intent,
   onClick,
   ...props
-}: PaginationButtonProps) {
+}: Props) {
   return (
     <button
       className={paginationButton({ intent, position, className })}

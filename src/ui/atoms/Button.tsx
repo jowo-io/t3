@@ -29,15 +29,10 @@ const button = cva(["button", "flex", "justify-center", "items-center"], {
   },
 });
 
-export interface ButtonProps
+interface Props
   extends ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof button> {}
 
-export default function Button({
-  className,
-  intent,
-  size,
-  ...props
-}: ButtonProps) {
+export default function Button({ className, intent, size, ...props }: Props) {
   return <button className={button({ intent, size, className })} {...props} />;
 }
