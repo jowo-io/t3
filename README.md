@@ -58,6 +58,7 @@ migrations
 
 ##### To do
 
+BUG: when uploading avatar and no name is set, the avatar fails to upload.
 read clean code
 add search input in posts page
 storybook
@@ -119,4 +120,4 @@ $ ipconfig
 
 Then look for the `Wireless LAN adapter Wi-Fi` section under the `IPv4 Address` section.
 
-Be sure to update the `NEXTAUTH_URL` in the `.env` file too!
+Be sure to update the `NEXT_PUBLIC_SITE_URL` in the `.env` file too!

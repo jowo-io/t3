@@ -2,6 +2,8 @@ import { z } from "zod";
 
 /** @type {Record<keyof z.infer<typeof server> | keyof z.infer<typeof client>, string | undefined>} */
 const processEnv = {
+  NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
+
   DB_HOST: process.env.DB_HOST,
   DB_USERNAME: process.env.DB_USERNAME,
   DB_PASSWORD: process.env.DB_PASSWORD,
@@ -25,6 +27,8 @@ const processEnv = {
 };
 
 const client = z.object({
+  NEXT_PUBLIC_SITE_URL: z.string().min(1).optional(),
+
   NODE_ENV: z.enum(["development", "test", "production"]),
 
   NEXT_PUBLIC_STORAGE_URL: z.string().min(1),

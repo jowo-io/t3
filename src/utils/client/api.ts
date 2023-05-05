@@ -5,8 +5,6 @@ import superjson from "superjson";
 
 import { type AppRouter } from "@/server/routers";
 
-import { getBaseUrl } from "@/utils/isomorphic/url";
-
 import { env } from "@/env.mjs";
 
 export const api = createTRPCNext<AppRouter>({
@@ -21,7 +19,7 @@ export const api = createTRPCNext<AppRouter>({
             (opts.direction === "down" && opts.result instanceof Error),
         }),
         httpBatchLink({
-          url: `${getBaseUrl()}/api/trpc`,
+          url: `${env.NEXT_PUBLIC_SITE_URL}/api/trpc`,
         }),
       ],
     };
@@ -32,4 +30,3 @@ export const api = createTRPCNext<AppRouter>({
 export type RouterInputs = inferRouterInputs<AppRouter>;
 
 export type RouterOutputs = inferRouterOutputs<AppRouter>;
-
