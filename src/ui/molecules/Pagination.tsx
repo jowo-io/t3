@@ -24,12 +24,26 @@ export default function Pagination({
   return (
     <div className="flex w-full flex-col justify-center px-4 py-3">
       <p className="pb-3 text-center text-sm text-white">
-        Showing <span className="font-medium">{page * resultsPerPage + 1}</span>{" "}
-        to{" "}
-        <span className="font-medium">
-          {Math.min(count, page * resultsPerPage + resultsPerPage)}
-        </span>{" "}
-        of <span className="font-medium">{count}</span> results
+        {pages === 0 && (
+          <>
+            <span className="font-medium">No</span> results found
+          </>
+        )}
+        {pages === 1 && (
+          <>
+            Showing <span className="font-medium">all</span> results
+          </>
+        )}
+        {pages > 1 && (
+          <>
+            Showing{" "}
+            <span className="font-medium">{page * resultsPerPage + 1}</span> to{" "}
+            <span className="font-medium">
+              {Math.min(count, page * resultsPerPage + resultsPerPage)}
+            </span>{" "}
+            of <span className="font-medium">{count}</span> results
+          </>
+        )}
       </p>
       {pages > 1 && (
         <nav
