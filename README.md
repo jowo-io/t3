@@ -58,13 +58,11 @@ migrations
 
 ##### To do
 
-BUG: when uploading avatar and no name is set, the avatar fails to upload.
 read clean code
 add search input in posts page
 storybook
 next i18n
 next-auth roles (see UserRole type)
-SEO
 boolean names (post.published)
 shared validationSchema
 lightning auth: https://github.com/silencesoft/lightning-next-auth-example
