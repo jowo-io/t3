@@ -18,7 +18,7 @@ export default function PostViewScreen({ post, user }: Props) {
         >
           <small className="flex w-full flex-row items-center justify-between">
             <b>{post.slug}</b>
-            {!post.published && <i>Draft</i>}
+            {!post.isPublished && <i>Draft</i>}
           </small>
 
           <p className="my-2">{post.text}</p>

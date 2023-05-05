@@ -63,7 +63,6 @@ add search input in posts page
 storybook
 next i18n
 next-auth roles (see UserRole type)
-boolean names (post.published)
 shared validationSchema
 lightning auth: https://github.com/silencesoft/lightning-next-auth-example
 

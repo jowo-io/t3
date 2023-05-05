@@ -25,7 +25,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
         text: postTable.text,
         slug: postTable.slug,
         summary: postTable.summary,
-        published: postTable.published,
+        isPublished: postTable.isPublished,
       },
       user: {
         id: userTable.id,
@@ -40,7 +40,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   // is post allowed to be shown?
   const post = data?.[0]?.post;
   const user = data?.[0]?.user;
-  if (post && user && (post.published || currentUser?.id === user.id)) {
+  if (post && user && (post.isPublished || currentUser?.id === user.id)) {
     return { props: { post, user } };
   }
 

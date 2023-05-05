@@ -15,7 +15,7 @@ export const postTable = mysqlTable(
   {
     id: varchar("id", { length: idLength }).primaryKey().notNull(),
     userId: varchar("userId", { length: idLength }).notNull(),
-    published: boolean("published").notNull(),
+    isPublished: boolean("isPublished").notNull(),
     slug: varchar("slug", { length: 191 }).notNull(),
     title: text("title").notNull(),
     text: text("text").notNull(),

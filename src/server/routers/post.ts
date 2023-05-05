@@ -33,7 +33,7 @@ export const postRouter = createTRPCRouter({
       await db.insert(postTable).values({
         id,
         userId: user.id,
-        published: true,
+        isPublished: true,
         title: input.title,
         text: input.text,
         summary,
@@ -63,7 +63,7 @@ export const postRouter = createTRPCRouter({
       const { db } = ctx;
       const { page, resultsPerPage } = input;
 
-      const where = eq(postTable.published, true);
+      const where = eq(postTable.isPublished, true);
 
       const count = (
         await db
