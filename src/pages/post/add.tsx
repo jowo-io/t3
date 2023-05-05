@@ -3,7 +3,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
 import Head from "@/ui/snowflakes/Head";
-import BasicLayout from "@/ui/layout/Basic";
+import BasicTemplate from "@/ui/template/Basic";
 import { api } from "@/utils/client/api";
 import PostAddScreen from "@/screens/Post/Add";
 
@@ -14,7 +14,7 @@ export default function AddPostPage({}: PropsWithChildren) {
   const mutation = api.post.add.useMutation({ onSuccess: () => push("/post") });
 
   return (
-    <BasicLayout>
+    <BasicTemplate>
       <Head description="Add a new post" title="Add post" />
       {session ? (
         <PostAddScreen
@@ -25,6 +25,6 @@ export default function AddPostPage({}: PropsWithChildren) {
       ) : (
         <div className="text-white">Please login to see this page</div>
       )}
-    </BasicLayout>
+    </BasicTemplate>
   );
 }

@@ -3,7 +3,7 @@ import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import { eq } from "drizzle-orm/expressions";
 
 import Head from "@/ui/snowflakes/Head";
-import BasicLayout from "@/ui/layout/Basic";
+import BasicTemplate from "@/ui/template/Basic";
 import { getServerAuthSession } from "@/server/auth";
 import { db } from "@/server/db";
 import { postTable, userTable } from "@/db";
@@ -53,7 +53,7 @@ export default function ViewPostPage({
   user,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
-    <BasicLayout>
+    <BasicTemplate>
       {post && user ? (
         <>
           <Head description={post?.summary} title={post?.title} />
@@ -70,6 +70,6 @@ export default function ViewPostPage({
           </span>
         </>
       )}
-    </BasicLayout>
+    </BasicTemplate>
   );
 }
