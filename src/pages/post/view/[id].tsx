@@ -2,6 +2,7 @@ import React from "react";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import { eq } from "drizzle-orm/expressions";
 
+import Head from "@/ui/snowflakes/Head";
 import BasicTemplate from "@/ui/templates/Basic";
 import { getServerAuthSession } from "@/server/auth";
 import { db } from "@/server/db";
@@ -23,6 +24,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
         title: postTable.title,
         text: postTable.text,
         slug: postTable.slug,
+        summary: postTable.summary,
         published: postTable.published,
       },
       user: {
@@ -52,7 +54,22 @@ export default function ViewPostPage({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <BasicTemplate>
-      <PostViewScreen post={post} user={user} />
+      {post && user ? (
+        <>
+          <Head description={post?.summary} title={post?.title} />
+          <PostViewScreen post={post} user={user} />
+        </>
+      ) : (
+        <>
+          <Head
+            description="The post are looking for could not be found"
+            title="Post not found"
+          />
+          <span className="text-white">
+            The post are looking for could not be found
+          </span>
+        </>
+      )}
     </BasicTemplate>
   );
 }

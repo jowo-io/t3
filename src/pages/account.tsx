@@ -2,9 +2,10 @@ import React, { PropsWithChildren, BaseSyntheticEvent } from "react";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 
+import Head from "@/ui/snowflakes/Head";
+import BasicTemplate from "@/ui/templates/Basic";
 import { api } from "@/utils/client/api";
 import { resizeImageBlob } from "@/utils/client/pica";
-import BasicTemplate from "@/ui/templates/Basic";
 import AccountEditScreen, { fileExt } from "@/screens/Account/Edit";
 
 export default function AccountPage({}: PropsWithChildren) {
@@ -35,6 +36,7 @@ export default function AccountPage({}: PropsWithChildren) {
 
   return (
     <BasicTemplate>
+      <Head description="View and modify your account" title="Your account" />
       <AccountEditScreen
         onSubmit={async (values) => {
           const user = await updateAccount.mutateAsync(values, {
