@@ -37,6 +37,7 @@ mysql
 drizzle
 tRPC
 aws/s3-client
+storybook
 
 ### To add:
 
@@ -60,7 +61,6 @@ migrations
 
 read clean code
 add search input in posts page
-storybook
 next i18n
 shared validationSchema
 lightning auth: https://github.com/silencesoft/lightning-next-auth-example

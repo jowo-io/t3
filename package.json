@@ -9,7 +9,9 @@
     "start": "next start",
     "db:up": "drizzle-kit up:mysql --config drizzle.config.ts",
     "db:generate": "drizzle-kit generate:mysql --config drizzle.config.ts",
-    "db:push": "drizzle-kit push:mysql --config drizzle.config.ts"
+    "db:push": "drizzle-kit push:mysql --config drizzle.config.ts",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.312.0",
@@ -40,6 +42,14 @@
     "zod": "^3.20.6"
   },
   "devDependencies": {
+    "@storybook/addon-essentials": "^7.0.9",
+    "@storybook/addon-interactions": "^7.0.9",
+    "@storybook/addon-links": "^7.0.9",
+    "@storybook/addon-styling": "^1.0.6",
+    "@storybook/blocks": "^7.0.9",
+    "@storybook/nextjs": "^7.0.9",
+    "@storybook/react": "^7.0.9",
+    "@storybook/testing-library": "^0.0.14-next.2",
     "@types/node": "^18.14.0",
     "@types/pica": "^9.0.1",
     "@types/prettier": "^2.7.2",
@@ -52,6 +62,7 @@
     "postcss": "^8.4.14",
     "prettier": "^2.8.1",
     "prettier-plugin-tailwindcss": "^0.2.1",
+    "storybook": "^7.0.9",
     "tailwindcss": "^3.2.0",
     "typescript": "^4.9.5"
   },
