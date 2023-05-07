@@ -53,6 +53,7 @@ After experimenting with many service and hosting providers, I found the followi
 - [PlanetScale](https://planetscale.com/) - For an infinitely scalable MySQL database.
 - [Cloudflare](https://www.cloudflare.com/en-gb/) - For S3 compatible object storage.
 - [MailJet](https://www.mailjet.com/) - For sending magic link authentication emails.
+- [Chromatic](https://chromatic.com) - For hosting Storybook builds and managing UI changes.
 
 ## Get started
 

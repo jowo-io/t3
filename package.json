@@ -11,7 +11,8 @@
     "db:generate": "drizzle-kit generate:mysql --config drizzle.config.ts",
     "db:push": "drizzle-kit push:mysql --config drizzle.config.ts",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.312.0",
@@ -56,6 +57,7 @@
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "autoprefixer": "^10.4.7",
+    "chromatic": "^6.17.4",
     "drizzle-kit": "^0.17.1-6474464",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
@@ -68,5 +70,7 @@
   },
   "ct3aMetadata": {
     "initVersion": "7.8.0"
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "my-t3-drizzle@0.1.0"
 }
