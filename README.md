@@ -2,20 +2,9 @@
 
 Below are some personal TODOs I'd like to complete on this project before moving on to other things.
 
-#### investigate:
-
-- upstash
-- clerk.com
-- axiom.co
-- radix-ui.com
-- ui.shadcn.com
-- planetscale migrations
-- next i18n for multi language support
-
 #### actions:
 
 - add search input/filters in posts page
-- add lightning auth: https://github.com/silencesoft/lightning-next-auth-example
 - general tidy-up of the code ensuring everything is neat, commented and in the correct place
 
 ---
@@ -42,6 +31,8 @@ This app is opinionated. It implements some code and design patterns that I love
 
 - **Atomic design system** - In the `src/ui` folder, you'll see the components subdivided into `atoms/`, `molecules/`, `organisms/` etc. This is based on the [atomic design system](https://atomicdesign.bradfrost.com/)
 - **page/screen separation** - In this app you will find the `src/pages` to be logic heavy, importing all the necesary hooks and configuring all the relevant business logic. And you will find the `src/screens` to be light on logic but heavy on UI.
+- **Schema folder** -
+- **Utils folders** -
 
 ### Service providers
 
