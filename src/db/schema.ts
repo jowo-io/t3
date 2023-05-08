@@ -8,7 +8,7 @@ import {
 } from "drizzle-orm/mysql-core";
 import { InferModel } from "drizzle-orm";
 
-import { idLength } from "@/utils/isomorphic/id";
+import { idLength } from "@/utils/id";
 
 export const postTable = mysqlTable(
   "post",

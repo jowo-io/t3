@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from "react";
-import Header from "@/ui/organisms/Header";
+import Header from "@/client/ui/organisms/Header";
 
 interface Props extends PropsWithChildren {}
 

@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from "react";
 
-import Head from "@/ui/snowflakes/Head";
-import BasicTemplate from "@/ui/template/Basic";
+import Head from "@/client/ui/snowflakes/Head";
+import BasicTemplate from "@/client/ui/template/Basic";
 
 export default function HomePage({}: PropsWithChildren) {
   return (

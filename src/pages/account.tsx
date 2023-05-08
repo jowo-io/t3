@@ -2,10 +2,10 @@ import React, { PropsWithChildren, BaseSyntheticEvent } from "react";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 
-import Head from "@/ui/snowflakes/Head";
-import BasicTemplate from "@/ui/template/Basic";
-import { api } from "@/utils/client/api";
-import { resizeImageBlob } from "@/utils/client/pica";
+import Head from "@/client/ui/snowflakes/Head";
+import BasicTemplate from "@/client/ui/template/Basic";
+import { api } from "@/client/utils/api";
+import { resizeImageBlob } from "@/client/utils/pica";
 import AccountEditScreen, { fileExt } from "@/screens/Account/Edit";
 
 export default function AccountPage({}: PropsWithChildren) {

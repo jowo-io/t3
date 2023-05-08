@@ -9,7 +9,7 @@ import {
 import { userTable, postTable } from "@/db";
 
 import { validationSchema } from "@/screens/Post/Add";
-import { createId } from "@/utils/isomorphic/id";
+import { createId } from "@/utils/id";
 import { eq, desc, sql } from "drizzle-orm";
 
 export const postRouter = createTRPCRouter({

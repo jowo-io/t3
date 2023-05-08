@@ -2,8 +2,8 @@ import React from "react";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import { eq } from "drizzle-orm";
 
-import Head from "@/ui/snowflakes/Head";
-import BasicTemplate from "@/ui/template/Basic";
+import Head from "@/client/ui/snowflakes/Head";
+import BasicTemplate from "@/client/ui/template/Basic";
 import { getServerAuthSession } from "@/server/auth";
 import { db } from "@/server/db";
 import { postTable, userTable } from "@/db";

@@ -2,7 +2,7 @@ import type { Adapter } from "next-auth/adapters";
 import { and, eq } from "drizzle-orm";
 import { type MySql2Database } from "drizzle-orm/mysql2";
 
-import { createId } from "@/utils/isomorphic/id";
+import { createId } from "@/utils/id";
 import {
   accountTable,
   sessionTable,

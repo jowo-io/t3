@@ -3,10 +3,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, UseFormProps } from "react-hook-form";
 import { z } from "zod";
 
-import Button from "@/ui/atoms/Button";
+import Button from "@/client/ui/atoms/Button";
 import { env } from "@/env.mjs";
 import { User } from "@/db";
-import Spinner from "@/ui/atoms/Spinner";
+import Spinner from "@/client/ui/atoms/Spinner";
 
 export const fileExt = "webp";
 

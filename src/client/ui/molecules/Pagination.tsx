@@ -1,7 +1,7 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 
-import { repeat } from "@/utils/isomorphic/array";
-import PaginationButton from "@/ui/atoms/PaginationButton";
+import { repeat } from "@/utils/array";
+import PaginationButton from "@/client/ui/atoms/PaginationButton";
 
 type Props = {
   page: number;

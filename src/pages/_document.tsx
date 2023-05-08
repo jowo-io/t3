@@ -1,7 +1,7 @@
 import React from "react";
 import { Html, Head, Main, NextScript } from "next/document";
 
-import Favicon from "@/ui/snowflakes/Favicon";
+import Favicon from "@/client/ui/snowflakes/Favicon";
 
 export default function Document() {
   return (

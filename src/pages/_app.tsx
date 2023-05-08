@@ -2,7 +2,7 @@ import { type AppType } from "next/app";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 
-import { api } from "@/utils/client/api";
+import { api } from "@/client/utils/api";
 import usePrimaryDomain from "@/hooks/usePrimaryDomain";
 
 import "@/styles/globals.css";

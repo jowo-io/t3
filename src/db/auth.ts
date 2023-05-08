@@ -10,7 +10,7 @@ import {
   varchar,
 } from "drizzle-orm/mysql-core";
 
-import { idLength } from "@/utils/isomorphic/id";
+import { idLength } from "@/utils/id";
 
 export const accountTable = mysqlTable(
   "account",

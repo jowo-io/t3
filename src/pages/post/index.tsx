@@ -1,10 +1,10 @@
 import React, { useState, PropsWithChildren } from "react";
 
-import Head from "@/ui/snowflakes/Head";
-import BasicTemplate from "@/ui/template/Basic";
+import Head from "@/client/ui/snowflakes/Head";
+import BasicTemplate from "@/client/ui/template/Basic";
 import PostListScreen from "@/screens/Post/List";
-import { api } from "@/utils/client/api";
-import Spinner from "@/ui/atoms/Spinner";
+import { api } from "@/client/utils/api";
+import Spinner from "@/client/ui/atoms/Spinner";
 
 export default function ListPostPage({}: PropsWithChildren) {
   const [page, setPage] = useState(0);

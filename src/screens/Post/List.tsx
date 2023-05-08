@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-import Pagination from "@/ui/molecules/Pagination";
-import { RouterOutputs } from "@/utils/client/api";
+import Pagination from "@/client/ui/molecules/Pagination";
+import { RouterOutputs } from "@/client/utils/api";
 import { env } from "@/env.mjs";
 
 type Props = {
