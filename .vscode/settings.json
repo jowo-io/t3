@@ -1,16 +1,14 @@
 {
+  "runCurrentTest.run": "cd $( dirname ${relativeTestPath}); npm run test -- ${relativeTestPath}",
   "tailwindCSS.includeLanguages": {
-    "typescript": "typescript",
-    "javascript": "javascript",
-    "html": "HTML"
-  },
-  "editor.quickSuggestions": {
-    "other": true,
-    "comments": true,
-    "strings": true
+    "typescript": "typescript"
   },
   "tailwindCSS.experimental.classRegex": [
     ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
   ],
-  "tailwindCSS.classAttributes": ["className"]
+  "tailwindCSS.classAttributes": ["className"],
+  "typescript.preferences.autoImportFileExcludePatterns": [
+    "**/*.test.ts",
+    "**/*.stories.ts"
+  ]
 }

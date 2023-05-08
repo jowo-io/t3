@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "audit": "npm audit fix",
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
@@ -13,6 +12,8 @@
     "db:push": "drizzle-kit push:mysql --config drizzle.config.ts",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "audit": "npm audit fix",
+    "test": "jest",
     "chromatic": "npx chromatic"
   },
   "dependencies": {
@@ -52,6 +53,7 @@
     "@storybook/nextjs": "^7.0.9",
     "@storybook/react": "^7.0.9",
     "@storybook/testing-library": "^0.0.14-next.2",
+    "@types/jest": "^29.5.1",
     "@types/node": "^18.14.0",
     "@types/pica": "^9.0.1",
     "@types/prettier": "^2.7.2",
@@ -62,6 +64,7 @@
     "drizzle-kit": "^0.17.1-6474464",
     "eslint": "^8.40.0",
     "eslint-config-next": "^13.4.1",
+    "jest": "^29.5.0",
     "postcss": "^8.4.23",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.2.8",
