@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { eq } from "drizzle-orm/expressions";
+import { eq } from "drizzle-orm";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 

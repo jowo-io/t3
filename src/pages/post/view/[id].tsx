@@ -1,6 +1,6 @@
 import React from "react";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
-import { eq } from "drizzle-orm/expressions";
+import { eq } from "drizzle-orm";
 
 import Head from "@/ui/snowflakes/Head";
 import BasicTemplate from "@/ui/template/Basic";
