@@ -1,16 +1,10 @@
-import Button from "@/client/ui/atoms/Button";
-import Spinner from "@/client/ui/atoms/Spinner";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, UseFormProps } from "react-hook-form";
 import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-// validation schema is used by server
-export const validationSchema = z.object({
-  title: z.string().min(2).max(200),
-  text: z.string().min(5).max(5000),
-});
-
-type ValidationSchema = z.infer<typeof validationSchema>;
+import Button from "@/client/ui/atoms/Button";
+import Spinner from "@/client/ui/atoms/Spinner";
+import { addPostValidation, AddPostValidation } from "@/schema/validation";
 
 function useZodForm<TSchema extends z.ZodType>(
   props: Omit<UseFormProps<TSchema["_input"]>, "resolver"> & {
@@ -26,12 +20,12 @@ function useZodForm<TSchema extends z.ZodType>(
 }
 
 type Props = {
-  onSubmit: (values: ValidationSchema) => void;
+  onSubmit: (values: AddPostValidation) => void;
 };
 
 export default function PostAddScreen({ onSubmit }: Props) {
   const methods = useZodForm({
-    schema: validationSchema,
+    schema: addPostValidation,
     defaultValues: {
       title: "",
       text: "",

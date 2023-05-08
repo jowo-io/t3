@@ -4,23 +4,13 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 
 import { createTRPCRouter, protectedProcedure } from "@/server/trpc";
-
-import { validationSchema, fileExt } from "@/screens/Account/Edit";
-
-import { userTable } from "@/db";
-
-const bucketName = "plunda";
-
-function getAvatarPath(userId: string) {
-  return `avatars/${userId}.${fileExt}`;
-}
-function removeVersionQueryParam(path: string): string {
-  return path?.split("?")?.[0] || "";
-}
-function replaceVersionQueryParam(path: string): string {
-  if (!path) return "";
-  return removeVersionQueryParam(path) + `?v=${Date.now()}`;
-}
+import { userTable } from "@/schema/db";
+import { updateAccountValidation } from "@/schema/validation";
+import {
+  bucketName,
+  getAvatarPath,
+  replaceVersionQueryParam,
+} from "@/server/utils/s3";
 
 export const accountRouter = createTRPCRouter({
   createSignedAvatarUrl: protectedProcedure
@@ -44,7 +34,7 @@ export const accountRouter = createTRPCRouter({
     }),
 
   update: protectedProcedure
-    .input(validationSchema)
+    .input(updateAccountValidation)
     .mutation(async ({ ctx, input }) => {
       const { user } = ctx;
 

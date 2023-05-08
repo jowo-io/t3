@@ -6,7 +6,7 @@ import Head from "@/client/ui/snowflakes/Head";
 import BasicTemplate from "@/client/ui/template/Basic";
 import { getServerAuthSession } from "@/server/auth";
 import { db } from "@/server/db";
-import { postTable, userTable } from "@/db";
+import { postTable, userTable } from "@/schema/db";
 import PostViewScreen from "@/screens/Post/View";
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {

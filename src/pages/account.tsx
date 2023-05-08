@@ -6,7 +6,8 @@ import Head from "@/client/ui/snowflakes/Head";
 import BasicTemplate from "@/client/ui/template/Basic";
 import { api } from "@/client/utils/api";
 import { resizeImageBlob } from "@/client/utils/pica";
-import AccountEditScreen, { fileExt } from "@/screens/Account/Edit";
+import AccountEditScreen from "@/screens/Account/Edit";
+import { avatarFileExt } from "@/schema/validation";
 
 export default function AccountPage({}: PropsWithChildren) {
   const utils = api.useContext();
@@ -22,7 +23,7 @@ export default function AccountPage({}: PropsWithChildren) {
     try {
       const file = e?.target?.files?.[0];
       if (!file) return;
-      const blob = await resizeImageBlob(file, `image/${fileExt}`, 200);
+      const blob = await resizeImageBlob(file, `image/${avatarFileExt}`, 200);
       const url = await signedUrl.mutateAsync({ size: blob.size });
       await axios.put(url, blob);
     } catch (e) {

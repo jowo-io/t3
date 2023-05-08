@@ -15,7 +15,6 @@ Below are some personal TODOs I'd like to complete on this project before moving
 #### actions:
 
 - add search input/filters in posts page
-- move shared `validationSchema` to a more sensible location
 - add lightning auth: https://github.com/silencesoft/lightning-next-auth-example
 - general tidy-up of the code ensuring everything is neat, commented and in the correct place
 

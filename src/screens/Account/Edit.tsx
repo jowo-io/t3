@@ -5,18 +5,12 @@ import { z } from "zod";
 
 import Button from "@/client/ui/atoms/Button";
 import { env } from "@/env.mjs";
-import { User } from "@/db";
+import { User } from "@/schema/db";
 import Spinner from "@/client/ui/atoms/Spinner";
-
-export const fileExt = "webp";
-
-// validation schema is used by server
-export const validationSchema = z.object({
-  isImage: z.boolean().optional(),
-  name: z.string().max(25).optional(),
-});
-
-type ValidationSchema = z.infer<typeof validationSchema>;
+import {
+  UpdateAccountValidation,
+  updateAccountValidation,
+} from "@/schema/validation";
 
 function useZodForm<TSchema extends z.ZodType>(
   props: Omit<UseFormProps<TSchema["_input"]>, "resolver"> & {
@@ -32,13 +26,13 @@ function useZodForm<TSchema extends z.ZodType>(
 }
 
 type Props = {
-  onSubmit: (values: ValidationSchema) => void;
+  onSubmit: (values: UpdateAccountValidation) => void;
   onUpload: (e?: BaseSyntheticEvent) => void;
   account?: User;
 };
 
 const AccountEditScreen = ({ onSubmit, onUpload, account }: Props) => {
-  const methods = useZodForm({ schema: validationSchema });
+  const methods = useZodForm({ schema: updateAccountValidation });
 
   useEffect(() => {
     methods.reset({

@@ -1,4 +1,4 @@
-import { Post, User } from "@/db";
+import { Post, User } from "@/schema/db";
 import { env } from "@/env.mjs";
 
 type Props = {

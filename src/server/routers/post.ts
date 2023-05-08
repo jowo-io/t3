@@ -6,15 +6,15 @@ import {
   protectedProcedure,
 } from "@/server/trpc";
 
-import { userTable, postTable } from "@/db";
+import { userTable, postTable } from "@/schema/db";
 
-import { validationSchema } from "@/screens/Post/Add";
+import { addPostValidation } from "@/schema/validation";
 import { createId } from "@/utils/id";
 import { eq, desc, sql } from "drizzle-orm";
 
 export const postRouter = createTRPCRouter({
   add: protectedProcedure
-    .input(validationSchema)
+    .input(addPostValidation)
     .mutation(async ({ ctx, input }) => {
       const { db, user } = ctx;
 
