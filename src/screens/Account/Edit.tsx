@@ -11,6 +11,7 @@ import {
   UpdateAccountValidation,
   updateAccountValidation,
 } from "@/schema/validation";
+import Avatar from "@/client/ui/atoms/Avatar";
 
 function useZodForm<TSchema extends z.ZodType>(
   props: Omit<UseFormProps<TSchema["_input"]>, "resolver"> & {
@@ -51,8 +52,8 @@ const AccountEditScreen = ({ onSubmit, onUpload, account }: Props) => {
       <div>
         <h3 className="mb-2 text-lg font-bold text-white">Avatar image</h3>
         {account?.image && (
-          <img
-            alt="Avatar image"
+          <Avatar
+            size="full"
             className="mb-2"
             src={env.NEXT_PUBLIC_STORAGE_URL + account?.image}
           />

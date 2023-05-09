@@ -1,5 +1,6 @@
 import { Post, User } from "@/schema/db";
 import { env } from "@/env.mjs";
+import Avatar from "@/client/ui/atoms/Avatar";
 
 type Props = {
   post: Partial<Post>;
@@ -23,16 +24,11 @@ export default function PostViewScreen({ post, user }: Props) {
 
           <p className="my-2">{post.text}</p>
 
-          <div className="flex w-full flex-row items-center justify-start">
-            {user?.image && (
-              <div className="flex h-8 w-8 items-center justify-center overflow-hidden  rounded-full p-1">
-                <img
-                  src={env.NEXT_PUBLIC_STORAGE_URL + user.image}
-                  alt="Avatar image"
-                />
-              </div>
-            )}
-          </div>
+          {user?.image && (
+            <div>
+              <Avatar src={env.NEXT_PUBLIC_STORAGE_URL + user.image} />
+            </div>
+          )}
           <small>By {user.name || "anonymous"}</small>
         </article>
       </div>

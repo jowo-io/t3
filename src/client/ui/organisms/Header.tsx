@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import Button from "@/client/ui/atoms/Button";
 import { env } from "@/env.mjs";
+import Avatar from "@/client/ui/atoms/Avatar";
 
 type Props = {};
 
@@ -38,12 +39,10 @@ export default function Header({}: Props) {
           )}
         </p>
         {session?.user?.image && (
-          <div className="flex h-9 w-9 items-center justify-center overflow-hidden  rounded-full p-1">
-            <img
-              src={env.NEXT_PUBLIC_STORAGE_URL + session.user?.image}
-              alt="Avatar image"
-            />
-          </div>
+          <Avatar
+            size="small"
+            src={env.NEXT_PUBLIC_STORAGE_URL + session.user?.image}
+          />
         )}
         <Button
           onClick={session ? () => void signOut() : () => void signIn()}

@@ -3,6 +3,7 @@ import Link from "next/link";
 import Pagination from "@/client/ui/molecules/Pagination";
 import { RouterOutputs } from "@/client/utils/api";
 import { env } from "@/env.mjs";
+import Avatar from "@/client/ui/atoms/Avatar";
 
 type Props = {
   data?: RouterOutputs["post"]["list"];
@@ -30,13 +31,14 @@ export default function PostListScreen({ data, onChangePage }: Props) {
                 <h3 className="text-xl font-bold">{post.title}</h3>
                 <p className="my-2">{post.summary}</p>
 
-                <div className="flex w-full flex-row items-center justify-start">
-                  {user?.image && (
-                    <div className="flex h-8 w-8 items-center justify-center overflow-hidden  rounded-full p-1">
-                      <img src={env.NEXT_PUBLIC_STORAGE_URL + user?.image} />
-                    </div>
-                  )}
-                </div>
+                {user?.image && (
+                  <div>
+                    <Avatar
+                      size="small"
+                      src={env.NEXT_PUBLIC_STORAGE_URL + user?.image}
+                    />
+                  </div>
+                )}
                 <small>By {user?.name || "anonymous"}</small>
               </article>
             </Link>
