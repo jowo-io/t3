@@ -12,9 +12,9 @@
     "db:push": "drizzle-kit push:mysql --config drizzle.config.ts",
     "storybook": "storybook dev -p 6006 --no-open",
     "build-storybook": "storybook build",
+    "deploy-storybook": "npx chromatic",
     "audit": "npm audit fix",
-    "test": "jest",
-    "chromatic": "npx chromatic"
+    "test": "jest"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.328.0",
