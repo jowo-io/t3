@@ -1,9 +1,11 @@
+import { cx } from "class-variance-authority";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 
 import { repeat } from "@/utils/array";
 import IconButton from "@/client/ui/atoms/IconButton";
 
 type Props = {
+  className?: string;
   page: number;
   pages: number;
   resultsPerPage: number;
@@ -12,6 +14,7 @@ type Props = {
 };
 
 export default function Pagination({
+  className,
   page,
   pages,
   resultsPerPage,
@@ -22,7 +25,12 @@ export default function Pagination({
   const isLast = page === pages - 1;
 
   return (
-    <div className="flex w-full flex-col justify-center px-sm py-xs">
+    <div
+      className={cx(
+        "flex w-full flex-col justify-center px-sm py-xs",
+        className
+      )}
+    >
       <p className="pb-xs text-center text-sm text-white">
         {pages === 0 && (
           <>

@@ -12,6 +12,7 @@ import {
   updateAccountValidation,
 } from "@/schema/validation";
 import Avatar from "@/client/ui/atoms/Avatar";
+import Header from "@/client/ui/atoms/Header";
 
 function useZodForm<TSchema extends z.ZodType>(
   props: Omit<UseFormProps<TSchema["_input"]>, "resolver"> & {
@@ -47,10 +48,10 @@ const AccountEditScreen = ({ onSubmit, onUpload, account }: Props) => {
 
   return (
     <div className="w-full">
-      <h2 className="mb-sm text-white">Your account</h2>
+      <Header tag="h2">Your account</Header>
 
       <div>
-        <h4 className="mb-sm text-white">Avatar image</h4>
+        <Header tag="h4">Avatar image</Header>
         {account?.image && (
           <Avatar
             size="xl"
@@ -72,13 +73,13 @@ const AccountEditScreen = ({ onSubmit, onUpload, account }: Props) => {
 
       <hr className="mx-auto bg-white" />
 
+      <Header tag="h4">Account details</Header>
+
       <form
         onSubmit={methods.handleSubmit(async (values) => {
           await onSubmit(values);
         })}
       >
-        <h4 className="mb-sm text-white">Account details</h4>
-
         <div className="mb-sm">
           <label className="block text-white" htmlFor="email">
             Email

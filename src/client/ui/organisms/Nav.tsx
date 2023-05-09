@@ -8,7 +8,7 @@ import Avatar from "@/client/ui/atoms/Avatar";
 
 type Props = {};
 
-export default function Header({}: Props) {
+export default function Nav({}: Props) {
   const { data: session } = useSession();
 
   const links = [
