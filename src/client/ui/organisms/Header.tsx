@@ -41,7 +41,6 @@ export default function Header({}: Props) {
               {text}
             </Link>
           );
-
           return acc;
         }, [])}
       </div>
