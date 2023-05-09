@@ -7,6 +7,7 @@ import Button from "@/client/ui/atoms/Button";
 import { env } from "@/env.mjs";
 import { User } from "@/schema/db";
 import Spinner from "@/client/ui/atoms/Spinner";
+import Input from "@/client/ui/zod/Input";
 import {
   UpdateAccountValidation,
   updateAccountValidation,
@@ -80,30 +81,20 @@ const AccountEditScreen = ({ onSubmit, onUpload, account }: Props) => {
           await onSubmit(values);
         })}
       >
-        <div className="mb-sm">
-          <label className="block text-white" htmlFor="email">
-            Email
-          </label>
-          <input
-            id="email"
-            type="text"
-            value={account?.email || ""}
-            disabled
-            className="p-1 w-full border"
-          />
-        </div>
+        <Input
+          label="Email"
+          name="email"
+          type="email"
+          value={account?.email || ""}
+          disabled
+        />
 
-        <div className="mb-sm">
-          <label className="block text-white" htmlFor="name">
-            Name
-          </label>
-          <input {...methods.register("name")} className="p-1 w-full border" />
-          {methods.formState.errors.name?.message && (
-            <div className="mt-xs text-negative">
-              {methods.formState.errors.name?.message}
-            </div>
-          )}
-        </div>
+        <Input
+          label="Name"
+          placeholder="e.g. John Smith"
+          error={methods.formState.errors.name?.message}
+          {...methods.register("name")}
+        />
 
         <Button type="submit" disabled={methods.formState.isSubmitting}>
           {methods.formState.isSubmitting ? (

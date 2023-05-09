@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Button from "@/client/ui/atoms/Button";
 import Spinner from "@/client/ui/atoms/Spinner";
 import { addPostValidation, AddPostValidation } from "@/schema/validation";
+import { Textarea, Input } from "@/client/ui/zod";
 
 function useZodForm<TSchema extends z.ZodType>(
   props: Omit<UseFormProps<TSchema["_input"]>, "resolver"> & {
@@ -37,36 +38,24 @@ export default function PostAddScreen({ onSubmit }: Props) {
       <h2 className="mb-sm text-white">Add a post</h2>
       <form
         onSubmit={methods.handleSubmit(async (values) => {
+          console.log("values", values);
           await onSubmit(values);
           methods.reset();
         })}
       >
-        <div className="mb-sm">
-          <label className="block text-white" htmlFor="title">
-            Title
-          </label>
-          <input {...methods.register("title")} className="p-1 w-full border" />
-          {methods.formState.errors.title?.message && (
-            <div className="mt-xs text-negative">
-              {methods.formState.errors.title?.message}
-            </div>
-          )}
-        </div>
+        <Input
+          label="Title"
+          placeholder="e.g. My awesome post"
+          error={methods.formState.errors.title?.message}
+          {...methods.register("title")}
+        />
 
-        <div className="mb-sm">
-          <label className="block text-white" htmlFor="text">
-            Text
-          </label>
-          <textarea
-            {...methods.register("text")}
-            className="p-1 block w-full border"
-          />
-          {methods.formState.errors.text?.message && (
-            <div className="mt-xs text-negative">
-              {methods.formState.errors.text?.message}
-            </div>
-          )}
-        </div>
+        <Textarea
+          label="Text"
+          placeholder="e.g. Blah blah, blah blah..."
+          error={methods.formState.errors.text?.message}
+          {...methods.register("text")}
+        />
 
         <Button type="submit" disabled={methods.formState.isSubmitting}>
           {methods.formState.isSubmitting ? (
