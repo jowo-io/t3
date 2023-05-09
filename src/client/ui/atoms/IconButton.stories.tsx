@@ -4,7 +4,6 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 
 import IconButton from "./IconButton";
 
-// More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta: Meta<typeof IconButton> = {
   title: "atoms/IconButton",
   component: IconButton,
@@ -12,6 +11,7 @@ const meta: Meta<typeof IconButton> = {
 };
 
 export default meta;
+
 type Story = StoryObj<typeof IconButton>;
 
 export const Standalone: Story = {

@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import Spinner from "./Spinner";
 
-// More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta: Meta<typeof Spinner> = {
   title: "atoms/Spinner",
   component: Spinner,
@@ -11,6 +10,7 @@ const meta: Meta<typeof Spinner> = {
 };
 
 export default meta;
+
 type Story = StoryObj<typeof Spinner>;
 
 export const Primary: Story = {
