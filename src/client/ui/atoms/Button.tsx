@@ -1,32 +1,32 @@
 import React, { ButtonHTMLAttributes } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 
-const button = cva(["button", "flex", "justify-center", "items-center"], {
+const button = cva(["flex", "justify-center", "items-center"], {
   variants: {
     intent: {
       primary: [
-        "bg-blue-500",
-        "text-white",
-        "border-black",
-        "hover:bg-blue-600",
+        "bg-primary",
+        "text-secondary",
+        "border-off-black",
+        "hover:bg-primary-dark",
       ],
       secondary: [
-        "bg-slate-200",
-        "text-blue-500",
-        "border-black",
-        "hover:bg-slate-300",
+        "bg-secondary",
+        "text-primary",
+        "border-off-black",
+        "hover:bg-secondary-dark",
       ],
     },
     size: {
-      small: ["text-sm", "rounded-md", "py-1", "px-2", "h-6"],
-      medium: ["text-base", "rounded-lg", "py-2", "px-6", "h-10", "font-bold"],
-      large: ["text-xl", "rounded-lg", "py-3", "px-8", "h-12", "font-bold"],
+      sm: ["text-sm", "rounded-md", "py-xs", "px-xs", "h-md"],
+      md: ["text-md", "rounded-lg", "py-xs", "px-md", "h-lg", "font-bold"],
+      lg: ["text-xl", "rounded-lg", "py-xs", "px-md", "h-xl", "font-bold"],
     },
   },
   compoundVariants: [],
   defaultVariants: {
     intent: "primary",
-    size: "medium",
+    size: "md",
   },
 });
 

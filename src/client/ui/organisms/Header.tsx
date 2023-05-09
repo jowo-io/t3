@@ -21,21 +21,21 @@ export default function Header({}: Props) {
   }
 
   return (
-    <div className="mb-5 flex w-full flex-row justify-between gap-2">
-      <div className="leading-0 flex h-3 flex-row items-center gap-3">
+    <div className="mb-sm flex w-full flex-row justify-between gap-xs">
+      <div className="flex h-md flex-row items-center gap-xs leading-0">
         {links.reduce((acc: ReactNode[], { text, path }, index) => {
           if (index !== 0) {
             acc.push(
               <div
                 key={`divider-${text}`}
-                className="h-full w-0.5 bg-white"
+                className="h-full w-2px bg-white"
               ></div>
             );
           }
           acc.push(
             <Link
               key={`link-${text}`}
-              className="text-white hover:text-slate-200"
+              className="text-white hover:text-gray-200"
               href={path}
             >
               {text}
@@ -45,24 +45,24 @@ export default function Header({}: Props) {
         }, [])}
       </div>
 
-      <div className="flex flex-row items-center gap-2">
-        <p className="text-center text-white">
+      <div className="flex flex-row items-center gap-xs">
+        <div className="text-center text-white">
           {session?.user?.name && (
             <span>
               Logged in as <b>{session.user?.name}</b>
             </span>
           )}
-        </p>
+        </div>
         {session?.user?.image && (
           <Avatar
-            size="small"
+            size="md"
             src={env.NEXT_PUBLIC_STORAGE_URL + session.user?.image}
           />
         )}
         <Button
           onClick={session ? () => void signOut() : () => void signIn()}
-          size="small"
-          intent="secondary"
+          size="sm"
+          intent="primary"
         >
           {session ? "Sign out" : "Sign in"}
         </Button>

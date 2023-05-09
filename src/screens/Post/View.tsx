@@ -9,29 +9,26 @@ type Props = {
 
 export default function PostViewScreen({ post, user }: Props) {
   return (
-    <div className="flex w-full max-w-xs flex-col gap-2 py-2">
-      <h2 className="text-3xl font-bold text-white">{post.title}</h2>
+    <div className="flex w-full flex-col gap-xs py-xs">
+      <article
+        key={post.id}
+        className="overflow-hidden rounded-lg bg-white p-sm shadow"
+      >
+        <h2 className="mb-sm">{post.title}</h2>
+        <small className="flex w-full flex-row items-center justify-between">
+          <b>{post.slug}</b>
+          {!post.isPublished && <i>Draft</i>}
+        </small>
 
-      <div className="flex flex-col gap-2 py-2">
-        <article
-          key={post.id}
-          className="overflow-hidden bg-white p-4 shadow sm:rounded-lg"
-        >
-          <small className="flex w-full flex-row items-center justify-between">
-            <b>{post.slug}</b>
-            {!post.isPublished && <i>Draft</i>}
-          </small>
+        <div>{post.text}</div>
 
-          <p className="my-2">{post.text}</p>
-
-          {user?.image && (
-            <div>
-              <Avatar src={env.NEXT_PUBLIC_STORAGE_URL + user.image} />
-            </div>
-          )}
-          <small>By {user.name || "anonymous"}</small>
-        </article>
-      </div>
+        {user?.image && (
+          <div>
+            <Avatar size="lg" src={env.NEXT_PUBLIC_STORAGE_URL + user.image} />
+          </div>
+        )}
+        <small className="text-sm">By {user.name || "anonymous"}</small>
+      </article>
     </div>
   );
 }

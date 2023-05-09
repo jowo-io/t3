@@ -29,14 +29,21 @@ export const Secondary: Story = {
 
 export const Large: Story = {
   args: {
-    size: "medium",
+    size: "lg",
+    children: "Spinner",
+  },
+};
+
+export const Medium: Story = {
+  args: {
+    size: "md",
     children: "Spinner",
   },
 };
 
 export const Small: Story = {
   args: {
-    size: "small",
+    size: "sm",
     children: "Spinner",
   },
 };

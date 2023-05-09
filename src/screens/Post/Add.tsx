@@ -33,50 +33,44 @@ export default function PostAddScreen({ onSubmit }: Props) {
   });
 
   return (
-    <div className="flex w-full max-w-xs flex-col gap-2 py-2">
-      <h2 className="text-3xl font-bold text-white">Add a post</h2>
+    <div className="w-full">
+      <h2 className="mb-sm text-white">Add a post</h2>
       <form
         onSubmit={methods.handleSubmit(async (values) => {
           await onSubmit(values);
           methods.reset();
         })}
-        className="space-y-2"
       >
-        <div>
-          <label>
-            <span className="text-white">Title</span>
-            <br />
-            <input
-              {...methods.register("title")}
-              className="w-full border p-1"
-            />
+        <div className="mb-sm">
+          <label className="block text-white" htmlFor="title">
+            Title
           </label>
-
+          <input {...methods.register("title")} className="p-1 w-full border" />
           {methods.formState.errors.title?.message && (
-            <p className="text-red-700">
+            <div className="mt-xs text-negative">
               {methods.formState.errors.title?.message}
-            </p>
+            </div>
           )}
         </div>
-        <div>
-          <label>
-            <span className="text-white">Text</span>
-            <br />
-            <textarea
-              {...methods.register("text")}
-              className="w-full border p-1"
-            />
+
+        <div className="mb-sm">
+          <label className="block text-white" htmlFor="text">
+            Text
           </label>
+          <textarea
+            {...methods.register("text")}
+            className="p-1 block w-full border"
+          />
           {methods.formState.errors.text?.message && (
-            <p className="text-red-700">
+            <div className="mt-xs text-negative">
               {methods.formState.errors.text?.message}
-            </p>
+            </div>
           )}
         </div>
 
         <Button type="submit" disabled={methods.formState.isSubmitting}>
           {methods.formState.isSubmitting ? (
-            <Spinner size="small" intent="secondary" />
+            <Spinner size="sm" intent="secondary" />
           ) : (
             "Submit"
           )}

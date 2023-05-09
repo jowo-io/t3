@@ -14,15 +14,15 @@ const avatar = cva(
   {
     variants: {
       size: {
-        small: ["w-6", "h-6"],
-        medium: ["w-10", "h-10"],
-        large: ["w-16", "h-16"],
+        sm: ["w-sm", "h-sm"],
+        md: ["w-md", "h-md"],
+        lg: ["w-lg", "h-lg"],
         full: ["w-full", "h-full"],
       },
     },
     compoundVariants: [],
     defaultVariants: {
-      size: "medium",
+      size: "md",
     },
   }
 );

@@ -22,26 +22,23 @@ export default function Pagination({
   const isLast = page === pages - 1;
 
   return (
-    <div className="flex w-full flex-col justify-center px-4 py-3">
-      <p className="pb-3 text-center text-sm text-white">
+    <div className="flex w-full flex-col justify-center px-sm py-xs">
+      <p className="pb-xs text-center text-sm text-white">
         {pages === 0 && (
           <>
-            <span className="font-medium">No</span> results found
+            <b>No</b> results found
           </>
         )}
         {pages === 1 && (
           <>
-            Showing <span className="font-medium">all</span> results
+            Showing <b>all</b> results
           </>
         )}
         {pages > 1 && (
           <>
-            Showing{" "}
-            <span className="font-medium">{page * resultsPerPage + 1}</span> to{" "}
-            <span className="font-medium">
-              {Math.min(count, page * resultsPerPage + resultsPerPage)}
-            </span>{" "}
-            of <span className="font-medium">{count}</span> results
+            Showing <b>{page * resultsPerPage + 1}</b> to{" "}
+            <b>{Math.min(count, page * resultsPerPage + resultsPerPage)}</b> of{" "}
+            <b>{count}</b> results
           </>
         )}
       </p>
@@ -52,17 +49,18 @@ export default function Pagination({
         >
           <IconButton
             position="left"
+            size="lg"
             intent={isFirst ? "disable" : "enable"}
             onClick={() => onChange(page - 1)}
           >
             <span className="sr-only">Previous</span>
-            <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
+            <ChevronLeftIcon className="h-md w-md" aria-hidden="true" />
           </IconButton>
 
           {repeat((i) => {
             return (
               <IconButton
-                aria-current="page"
+                size="lg"
                 key={i + 1}
                 position="center"
                 intent={page === i ? "highlight" : "enable"}
@@ -75,11 +73,12 @@ export default function Pagination({
 
           <IconButton
             position="right"
+            size="lg"
             intent={isLast ? "disable" : "enable"}
             onClick={() => onChange(page + 1)}
           >
             <span className="sr-only">Next</span>
-            <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
+            <ChevronRightIcon className="h-md w-md" aria-hidden="true" />
           </IconButton>
         </nav>
       )}

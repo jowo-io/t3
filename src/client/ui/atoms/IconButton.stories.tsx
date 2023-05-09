@@ -24,13 +24,13 @@ export const Standalone: Story = {
 export const Left: Story = {
   args: {
     position: "left",
-    children: <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />,
+    children: <ChevronLeftIcon className="h-md w-md" aria-hidden="true" />,
   },
 };
 
 export const Right: Story = {
   args: {
     position: "right",
-    children: <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />,
+    children: <ChevronRightIcon className="h-md w-md" aria-hidden="true" />,
   },
 };

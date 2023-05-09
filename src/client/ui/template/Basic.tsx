@@ -5,9 +5,11 @@ interface Props extends PropsWithChildren {}
 
 export default function BasicTemplate({ children }: Props) {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#2e026d] to-[#15162c] p-4">
+    <main className="min-h-screen bg-off-black p-sm">
       <Header />
-      <div className="flex flex-col items-center gap-2">{children}</div>
+      <div className="m-auto flex w-full max-w-xs items-center justify-center">
+        {children}
+      </div>
     </main>
   );
 }

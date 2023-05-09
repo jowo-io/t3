@@ -4,18 +4,19 @@ import { cva, type VariantProps } from "class-variance-authority";
 const spinner = cva([], {
   variants: {
     intent: {
-      primary: ["fill-blue-600", "text-gray-200", "animate-spin"],
-      secondary: ["fill-black", "text-slate-400", "animate-spin"],
+      primary: ["fill-primary", "text-off-white", "animate-spin"],
+      secondary: ["fill-secondary", "text-gray-200", "animate-spin"],
     },
     size: {
-      small: ["w-4", "h-4"],
-      medium: ["w-8", "h-8"],
+      sm: ["w-sm", "h-sm"],
+      md: ["w-md", "h-md"],
+      lg: ["w-lg", "h-lg"],
     },
   },
-  compoundVariants: [{ intent: "primary", size: "medium", class: "font-bold" }],
+  compoundVariants: [{ intent: "primary", size: "md", class: "font-bold" }],
   defaultVariants: {
     intent: "primary",
-    size: "medium",
+    size: "md",
   },
 });
 

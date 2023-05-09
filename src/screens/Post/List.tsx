@@ -12,34 +12,36 @@ type Props = {
 
 export default function PostListScreen({ data, onChangePage }: Props) {
   return (
-    <>
-      <div className="flex h-9 w-full max-w-xs justify-between">
-        <h2 className="text-3xl font-bold text-white">Posts</h2>
+    <div className="w-full">
+      <div className="flex h-lg items-center justify-between">
+        <h2 className="text-white">Posts</h2>
         <Link className="text-white " href="/post/add">
           Add post
         </Link>
       </div>
 
-      <div className="flex w-full max-w-xs flex-col gap-2 py-2">
+      <div className="flex w-full flex-col gap-xs py-xs">
         {data &&
           data.results.map(({ post, user }) => (
             <Link key={post.id} href={`/post/view/${post.id}`}>
-              <article className="overflow-hidden bg-white p-4 shadow sm:rounded-lg">
+              <article className="overflow-hidden rounded-lg bg-white p-sm shadow">
                 <small>
                   <b>{post.slug}</b>
                 </small>
                 <h3 className="text-xl font-bold">{post.title}</h3>
-                <p className="my-2">{post.summary}</p>
+                <p className="my-xs">{post.summary}</p>
 
                 {user?.image && (
                   <div>
                     <Avatar
-                      size="small"
+                      size="md"
                       src={env.NEXT_PUBLIC_STORAGE_URL + user?.image}
                     />
                   </div>
                 )}
-                <small>By {user?.name || "anonymous"}</small>
+                <small className="text-sm">
+                  By {user?.name || "anonymous"}
+                </small>
               </article>
             </Link>
           ))}
@@ -52,6 +54,6 @@ export default function PostListScreen({ data, onChangePage }: Props) {
         count={data?.count || 0}
         onChange={onChangePage}
       />
-    </>
+    </div>
   );
 }

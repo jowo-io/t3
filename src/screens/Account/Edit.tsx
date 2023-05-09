@@ -46,15 +46,15 @@ const AccountEditScreen = ({ onSubmit, onUpload, account }: Props) => {
   }
 
   return (
-    <div className="flex w-full max-w-xs flex-col gap-2 py-2">
-      <h2 className="mb-5 text-3xl font-bold text-white">Your account</h2>
+    <div className="w-full">
+      <h2 className="mb-sm text-white">Your account</h2>
 
       <div>
-        <h3 className="mb-2 text-lg font-bold text-white">Avatar image</h3>
+        <h4 className="mb-sm text-white">Avatar image</h4>
         {account?.image && (
           <Avatar
             size="full"
-            className="mb-2"
+            className="mb-sm"
             src={env.NEXT_PUBLIC_STORAGE_URL + account?.image}
           />
         )}
@@ -66,52 +66,47 @@ const AccountEditScreen = ({ onSubmit, onUpload, account }: Props) => {
             await onSubmit({ isImage: true });
           })}
           disabled={methods.formState.isSubmitting}
-          className="m-0 rounded-sm border-black bg-slate-500 p-2 font-bold text-white"
+          className="m-0 rounded-lg border-black bg-gray-400 p-xs font-bold text-white"
         />
       </div>
 
-      <hr className="my-8 h-px w-full border-0 bg-white" />
+      <hr className="mx-auto bg-white" />
+
       <form
         onSubmit={methods.handleSubmit(async (values) => {
           await onSubmit(values);
         })}
-        className="space-y-2"
       >
-        <h3 className="text-lg font-bold text-white">Account details</h3>
+        <h4 className="mb-sm text-white">Account details</h4>
 
-        <div>
-          <label>
-            <span className="text-white">Email</span>
-            <br />
-            <input
-              id="email"
-              type="text"
-              className="w-full border p-1"
-              value={account?.email || ""}
-              disabled
-            />
+        <div className="mb-sm">
+          <label className="block text-white" htmlFor="email">
+            Email
           </label>
+          <input
+            id="email"
+            type="text"
+            value={account?.email || ""}
+            disabled
+            className="p-1 w-full border"
+          />
         </div>
 
-        <div>
-          <label>
-            <span className="text-white">Name</span>
-            <br />
-            <input
-              {...methods.register("name")}
-              className="w-full border p-1"
-            />
+        <div className="mb-sm">
+          <label className="block text-white" htmlFor="name">
+            Name
           </label>
+          <input {...methods.register("name")} className="p-1 w-full border" />
           {methods.formState.errors.name?.message && (
-            <p className="text-red-700">
+            <div className="mt-xs text-negative">
               {methods.formState.errors.name?.message}
-            </p>
+            </div>
           )}
         </div>
 
         <Button type="submit" disabled={methods.formState.isSubmitting}>
           {methods.formState.isSubmitting ? (
-            <Spinner size="small" intent="secondary" />
+            <Spinner size="sm" intent="secondary" />
           ) : (
             "Submit"
           )}
