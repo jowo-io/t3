@@ -53,7 +53,7 @@ const AccountEditScreen = ({ onSubmit, onUpload, account }: Props) => {
         <h4 className="mb-sm text-white">Avatar image</h4>
         {account?.image && (
           <Avatar
-            size="full"
+            size="xl"
             className="mb-sm"
             src={env.NEXT_PUBLIC_STORAGE_URL + account?.image}
           />

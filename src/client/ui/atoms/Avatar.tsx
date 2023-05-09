@@ -17,6 +17,7 @@ const avatar = cva(
         sm: ["w-sm", "h-sm"],
         md: ["w-md", "h-md"],
         lg: ["w-lg", "h-lg"],
+        xl: ["w-xl", "h-xl"],
         full: ["w-full", "h-full"],
       },
     },
