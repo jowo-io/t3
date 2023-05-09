@@ -16,7 +16,7 @@ const iconButton = cva(
         left: ["rounded-l-md"],
         center: ["px-sm"],
         right: ["rounded-r-md"],
-        standalone: ["px-sm", "rounded-md"],
+        standalone: ["rounded-md"],
       },
       intent: {
         enable: ["bg-white", "text-gray-900", "hover:bg-gray-100"],
