@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
@@ -10,24 +11,39 @@ type Props = {};
 export default function Header({}: Props) {
   const { data: session } = useSession();
 
+  const links = [
+    { text: "Home", path: "/" },
+    { text: "Posts", path: "/post" },
+  ];
+
+  if (session) {
+    links.push({ text: "Account", path: "/account" });
+  }
+
   return (
     <div className="mb-5 flex w-full flex-row justify-between gap-2">
-      <div className="flex flex-row items-center gap-2">
-        <Link className="text-white" href="/">
-          Home
-        </Link>
-        <b className="text-white">|</b>
-        <Link className="text-white" href="/post">
-          Posts
-        </Link>
-        {session && (
-          <>
-            <b className="text-white">|</b>
-            <Link className="text-white" href="/account">
-              Account
+      <div className="leading-0 flex h-3 flex-row items-center gap-3">
+        {links.reduce((acc: ReactNode[], { text, path }, index) => {
+          if (index !== 0) {
+            acc.push(
+              <div
+                key={`divider-${text}`}
+                className="h-full w-0.5 bg-white"
+              ></div>
+            );
+          }
+          acc.push(
+            <Link
+              key={`link-${text}`}
+              className="text-white hover:text-slate-200"
+              href={path}
+            >
+              {text}
             </Link>
-          </>
-        )}
+          );
+
+          return acc;
+        }, [])}
       </div>
 
       <div className="flex flex-row items-center gap-2">
