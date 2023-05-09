@@ -1,7 +1,7 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 
 import { repeat } from "@/utils/array";
-import PaginationButton from "@/client/ui/atoms/PaginationButton";
+import IconButton from "@/client/ui/atoms/IconButton";
 
 type Props = {
   page: number;
@@ -50,18 +50,18 @@ export default function Pagination({
           className="grid grid-cols-10 justify-items-center overflow-hidden rounded-md bg-white shadow-sm"
           aria-label="Pagination"
         >
-          <PaginationButton
+          <IconButton
             position="left"
             intent={isFirst ? "disable" : "enable"}
             onClick={() => onChange(page - 1)}
           >
             <span className="sr-only">Previous</span>
             <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
-          </PaginationButton>
+          </IconButton>
 
           {repeat((i) => {
             return (
-              <PaginationButton
+              <IconButton
                 aria-current="page"
                 key={i + 1}
                 position="center"
@@ -69,18 +69,18 @@ export default function Pagination({
                 onClick={() => onChange(i)}
               >
                 {i + 1}
-              </PaginationButton>
+              </IconButton>
             );
           }, pages)}
 
-          <PaginationButton
+          <IconButton
             position="right"
             intent={isLast ? "disable" : "enable"}
             onClick={() => onChange(page + 1)}
           >
             <span className="sr-only">Next</span>
             <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
-          </PaginationButton>
+          </IconButton>
         </nav>
       )}
     </div>

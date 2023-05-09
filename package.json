@@ -10,7 +10,7 @@
     "db:up": "drizzle-kit up:mysql --config drizzle.config.ts",
     "db:generate": "drizzle-kit generate:mysql --config drizzle.config.ts",
     "db:push": "drizzle-kit push:mysql --config drizzle.config.ts",
-    "storybook": "storybook dev -p 6006",
+    "storybook": "storybook dev -p 6006 --no-open",
     "build-storybook": "storybook build",
     "audit": "npm audit fix",
     "test": "jest",
