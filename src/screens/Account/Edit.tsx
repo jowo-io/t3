@@ -38,10 +38,8 @@ const AccountEditScreen = ({ onSubmit, onUpload, account }: Props) => {
   const methods = useZodForm({ schema: updateAccountValidation });
 
   useEffect(() => {
-    methods.reset({
-      name: account?.name || "",
-    });
-  }, [account?.name]);
+    methods.reset({ name: account?.name || "" });
+  }, [account?.name, methods]);
 
   if (!account) {
     return <Spinner />;
