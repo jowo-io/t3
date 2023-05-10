@@ -31,7 +31,7 @@ export default function PostListScreen({ data, onChangePage }: Props) {
           data.results.map(({ post, user }) => (
             <Link key={post.id} href={`/post/view/${post.id}/${post.slug}`}>
               <article className="overflow-hidden rounded-lg bg-white p-sm shadow shadow-primary">
-                <Header tag="h3" color="black">
+                <Header tag="h4" color="black">
                   {post.title}
                 </Header>
 
