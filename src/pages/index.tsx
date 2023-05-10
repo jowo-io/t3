@@ -7,7 +7,7 @@ import Header from "@/client/ui/atoms/Header";
 export default function HomePage({}: PropsWithChildren) {
   return (
     <BasicTemplate>
-      <Head description="This is the welcome page" title="Welcome" />
+      <Head description="This is a demo app" title="Demo app" />
       <div className="w-full">
         <Header tag="h1">Demo app</Header>
         <p className="text-white">
