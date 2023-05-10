@@ -30,6 +30,7 @@ export const accountRouter = createTRPCRouter({
         ContentLength: size,
       });
       const url = await getSignedUrl(s3, command, { expiresIn: 3600 });
+
       return url;
     }),
 
@@ -39,6 +40,7 @@ export const accountRouter = createTRPCRouter({
       const { user } = ctx;
 
       const data: { image?: string; name?: string } = {};
+
       if (input.isImage) {
         data.image = replaceVersionQueryParam(getAvatarPath(user.id));
       } else {

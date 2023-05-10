@@ -94,6 +94,7 @@ export const postRouter = createTRPCRouter({
         .orderBy(desc(postTable.createdAt))
         .where(where)
         .leftJoin(userTable, eq(userTable.id, postTable.userId));
+
       return { results, count, pages, page, resultsPerPage };
     }),
 });
