@@ -5,6 +5,7 @@ import { RouterOutputs } from "@/client/utils/api";
 import { env } from "@/env.mjs";
 import Avatar from "@/client/ui/atoms/Avatar";
 import Header from "@/client/ui/atoms/Header";
+import TitledAvatar from "@/client/ui/molecules/TitledAvatar";
 
 export interface Props {
   data?: RouterOutputs["post"]["list"];
@@ -29,26 +30,22 @@ export default function PostListScreen({ data, onChangePage }: Props) {
         {data &&
           data.results.map(({ post, user }) => (
             <Link key={post.id} href={`/post/view/${post.id}`}>
-              <article className="overflow-hidden rounded-lg bg-white p-sm shadow">
+              <article className="overflow-hidden rounded-lg bg-white p-sm shadow shadow-primary">
                 <small>
                   <b>{post.slug}</b>
                 </small>
+
                 <Header tag="h3" color="black">
                   {post.title}
                 </Header>
+
                 <p className="my-xs">{post.summary}</p>
 
-                {user?.image && (
-                  <div>
-                    <Avatar
-                      size="md"
-                      src={env.NEXT_PUBLIC_STORAGE_URL + user?.image}
-                    />
-                  </div>
-                )}
-                <small className="text-sm">
-                  By {user?.name || "anonymous"}
-                </small>
+                <TitledAvatar
+                  size="md"
+                  src={env.NEXT_PUBLIC_STORAGE_URL + user?.image}
+                  title={`By ${user?.name || "anonymous"}`}
+                />
               </article>
             </Link>
           ))}

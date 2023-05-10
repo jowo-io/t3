@@ -2,6 +2,7 @@ import { Post, User } from "@/schema/db";
 import { env } from "@/env.mjs";
 import Avatar from "@/client/ui/atoms/Avatar";
 import Header from "@/client/ui/atoms/Header";
+import TitledAvatar from "@/client/ui/molecules/TitledAvatar";
 
 export interface Props {
   post: Partial<Post>;
@@ -23,14 +24,15 @@ export default function PostViewScreen({ post, user }: Props) {
         </small>
 
         <div>{post.text}</div>
-
-        {user?.image && (
-          <div>
-            <Avatar size="lg" src={env.NEXT_PUBLIC_STORAGE_URL + user.image} />
-          </div>
-        )}
-        <small className="text-sm">By {user.name || "anonymous"}</small>
       </article>
+
+      <TitledAvatar
+        size="lg"
+        className="mt-sm"
+        color="white"
+        src={env.NEXT_PUBLIC_STORAGE_URL + user.image}
+        title={`By ${user.name || "anonymous"}`}
+      />
     </div>
   );
 }

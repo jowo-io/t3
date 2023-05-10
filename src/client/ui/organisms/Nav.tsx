@@ -3,8 +3,9 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
 import Button from "@/client/ui/atoms/Button";
+import TitledAvatar from "@/client/ui/molecules/TitledAvatar";
+
 import { env } from "@/env.mjs";
-import Avatar from "@/client/ui/atoms/Avatar";
 
 export interface Props {}
 
@@ -46,19 +47,17 @@ export default function Nav({}: Props) {
       </div>
 
       <div className="flex flex-row items-center gap-xs">
-        <div className="text-center text-white">
-          {session?.user?.name && (
-            <span>
-              Logged in as <b>{session.user?.name}</b>
-            </span>
-          )}
-        </div>
-        {session?.user?.image && (
-          <Avatar
-            size="md"
-            src={env.NEXT_PUBLIC_STORAGE_URL + session.user?.image}
-          />
-        )}
+        <TitledAvatar
+          size="md"
+          direction="left"
+          color="white"
+          src={
+            session?.user?.image
+              ? env.NEXT_PUBLIC_STORAGE_URL + session?.user?.image
+              : undefined
+          }
+          title={session?.user?.name}
+        />
         <Button
           onClick={session ? () => void signOut() : () => void signIn()}
           size="sm"
