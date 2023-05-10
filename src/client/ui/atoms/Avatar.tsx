@@ -31,15 +31,15 @@ const avatar = cva(
 export interface Props
   extends HTMLAttributes<HTMLElement>,
     VariantProps<typeof avatar> {
-  src: string;
-  alt?: string;
+  src?: string | null;
+  alt?: string | null;
 }
 
 export default function Avatar({ className, size, src, alt, ...props }: Props) {
   return (
     <span className={avatar({ size, className })} {...props}>
       <img
-        src={src}
+        src={src || "/fallback-avatar.png"}
         alt={alt || "Avatar"}
         className={cx(
           "block",

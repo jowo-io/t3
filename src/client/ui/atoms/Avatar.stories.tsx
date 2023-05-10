@@ -33,3 +33,9 @@ export const Horizontal: Story = {
     src: "https://upload.wikimedia.org/wikipedia/commons/0/0d/ZKMalbork_cropped.jpg",
   },
 };
+
+export const Fallback: Story = {
+  args: {
+    size: "lg",
+  },
+};
