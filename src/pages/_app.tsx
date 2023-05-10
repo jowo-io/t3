@@ -4,6 +4,7 @@ import { SessionProvider } from "next-auth/react";
 
 import { api } from "@/client/utils/api";
 import usePrimaryDomain from "@/hooks/usePrimaryDomain";
+import ErrorBoundary from "@/client/ui/snowflakes/ErrorBoundary";
 
 import "@/styles/globals.css";
 
@@ -14,9 +15,11 @@ const MyApp: AppType<{ session: Session | null }> = ({
   usePrimaryDomain();
 
   return (
-    <SessionProvider session={session}>
-      <Component {...pageProps} />
-    </SessionProvider>
+    <ErrorBoundary>
+      <SessionProvider session={session}>
+        <Component {...pageProps} />
+      </SessionProvider>
+    </ErrorBoundary>
   );
 };
 

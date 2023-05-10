@@ -11,7 +11,7 @@ Below are some personal TODOs I'd like to complete on this project before moving
 - add test file for all utils e.g. `src\server\utils\s3.ts`
 - consider how loading states are handled
 - consider how auth walls are handled
-- consider how errors and global exceptions are handled
+- consider how api errors are handled
 - final sweep of the code to ensure everything is neat and tidy
 
 ---
