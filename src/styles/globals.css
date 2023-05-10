@@ -185,14 +185,18 @@
     @apply bg-primary text-secondary;
   }
 
-  a {
-  }
   img {
     font-size: 0; /* don't show alt text while image loading */
   }
+
+  a {
+    @apply text-off-black hover:text-gray-200;
+  }
+
   small {
     @apply block text-xs leading-md;
   }
+
   p {
     @apply mb-sm mt-0;
   }
@@ -206,7 +210,6 @@
   samp,
   figcaption,
   figure {
-    /* font-feature-settings: "salt" on; */
     @apply font-mono;
   }
 
@@ -257,10 +260,6 @@
   *[contenteditable="true"] {
     user-select: text !important;
     @apply font-regular;
-  }
-
-  a {
-    @apply text-off-black hover:text-gray-200;
   }
 
   ul {
