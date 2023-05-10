@@ -2,7 +2,7 @@ import Header from "@/client/ui/atoms/Header";
 
 export interface Props {}
 
-export default function ErrorScreen({}: Props) {
+export default function ErrorExceptionScreen({}: Props) {
   return (
     <div className="flex w-full flex-col gap-xs py-xs">
       <Header tag="h2">An error occurred</Header>

@@ -1,7 +1,7 @@
 import React, { Component, ErrorInfo, ReactNode } from "react";
 
 import HeadlessTemplate from "@/client/ui/templates/Headless";
-import ErrorScreen from "@/screens/Error";
+import ErrorExceptionScreen from "@/screens/Error/Exception";
 
 interface Props {
   children?: ReactNode;
@@ -29,7 +29,7 @@ class ErrorBoundary extends Component<Props, State> {
     if (this.state.hasError) {
       return (
         <HeadlessTemplate>
-          <ErrorScreen />
+          <ErrorExceptionScreen />
         </HeadlessTemplate>
       );
     }
