@@ -8,7 +8,12 @@ Below are some personal TODOs I'd like to complete on this project before moving
 - consider adding constants/utils for links
 - investigate use of next/image
 - tidy and improve Pagination and IconButton components
-- general tidy-up of the code ensuring everything is neat, commented and in the correct place
+- add test file for `src\server\utils\s3.ts`
+- consider how loading states are handled
+- consider how auth walls are handled
+- consider how errors and global exceptions are handled
+- expand prettier config and run linter on all files
+- final sweep of the code to ensure everything is neat and tidy
 
 ---
 
