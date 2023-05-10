@@ -3,7 +3,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
 import Head from "@/client/ui/snowflakes/Head";
-import BasicTemplate from "@/client/ui/template/Basic";
+import BasicTemplate from "@/client/ui/templates/Basic";
 import { api } from "@/client/utils/api";
 import PostAddScreen from "@/screens/Post/Add";
 

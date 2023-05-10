@@ -1,7 +1,7 @@
 import React, { useState, PropsWithChildren } from "react";
 
 import Head from "@/client/ui/snowflakes/Head";
-import BasicTemplate from "@/client/ui/template/Basic";
+import BasicTemplate from "@/client/ui/templates/Basic";
 import PostListScreen from "@/screens/Post/List";
 import { api } from "@/client/utils/api";
 import Spinner from "@/client/ui/atoms/Spinner";

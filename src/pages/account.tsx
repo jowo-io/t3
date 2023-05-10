@@ -3,7 +3,7 @@ import { useSession } from "next-auth/react";
 import axios from "axios";
 
 import Head from "@/client/ui/snowflakes/Head";
-import BasicTemplate from "@/client/ui/template/Basic";
+import BasicTemplate from "@/client/ui/templates/Basic";
 import { api } from "@/client/utils/api";
 import { resizeImageBlob } from "@/client/utils/pica";
 import AccountEditScreen from "@/screens/Account/Edit";
