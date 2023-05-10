@@ -7,6 +7,7 @@ Below are some personal TODOs I'd like to complete on this project before moving
 - add search input/filters in posts page
 - consider adding constants/utils for links
 - investigate use of next/image
+- tidy and improve Pagination and IconButton components
 - general tidy-up of the code ensuring everything is neat, commented and in the correct place
 
 ---
