@@ -20,8 +20,8 @@ export default forwardRef<HTMLInputElement, Props>(function Input(
         className="w-full rounded border p-4px"
         id={name}
         name={name}
-        {...props}
         ref={ref}
+        {...props}
       />
       {error && <div className="mt-xs text-negative">{error}</div>}
     </div>

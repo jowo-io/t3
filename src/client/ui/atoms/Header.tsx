@@ -48,6 +48,7 @@ export default function Header({
   children,
   className,
   options,
+  ...props
 }: Props) {
   const Tag = tag || defaultTag;
   return (
@@ -60,6 +61,7 @@ export default function Header({
         margins[Tag],
         className
       )}
+      {...props}
     >
       <Tag className={header({ tag, color })}>{children}</Tag>
       {options && (

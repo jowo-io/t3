@@ -21,8 +21,8 @@ export default forwardRef<HTMLTextAreaElement, Props>(function Textarea(
         id={name}
         name={name}
         rows={10}
-        {...props}
         ref={ref}
+        {...props}
       />
       {error && <div className="mt-xs text-negative">{error}</div>}
     </div>
