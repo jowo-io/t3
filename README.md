@@ -32,6 +32,15 @@ This is my dream stack. It's my personal iteration on/flavour of the [T3](t3.gg)
 - [Storybook](https://cva.style/docs) - For development and testing of UI components.
 - [Jest](https://jestjs.io/) - For unit testing.
 
+### VSCode
+
+This app was built with VSCode, and as such contains some configuration in the `.vscode` folder.
+
+##### Plugins
+
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) and [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) - both plugins required for compatibility with the `eslint-config-prettier` dependency
+- [Run current test](https://marketplace.visualstudio.com/items?itemName=asvetliakov.run-current-test) (optional)
+
 ### Patterns
 
 This app is opinionated. It implements some code and design patterns that I love.
