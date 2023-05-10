@@ -46,14 +46,14 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^7.0.9",
-    "@storybook/addon-interactions": "^7.0.9",
-    "@storybook/addon-links": "^7.0.9",
+    "@storybook/addon-essentials": "^7.0.10",
+    "@storybook/addon-interactions": "^7.0.10",
+    "@storybook/addon-links": "^7.0.10",
     "@storybook/addon-styling": "^1.0.6",
-    "@storybook/blocks": "^7.0.9",
-    "@storybook/nextjs": "^7.0.9",
-    "@storybook/react": "^7.0.9",
-    "@storybook/testing-library": "^0.0.14-next.2",
+    "@storybook/blocks": "^7.0.10",
+    "@storybook/nextjs": "^7.0.10",
+    "@storybook/react": "^7.0.10",
+    "@storybook/testing-library": "^0.1.0",
     "@types/jest": "^29.5.1",
     "@types/node": "^18.14.0",
     "@types/pica": "^9.0.1",
@@ -69,7 +69,7 @@
     "postcss": "^8.4.23",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.2.8",
-    "storybook": "^7.0.9",
+    "storybook": "^7.0.10",
     "tailwindcss": "^3.3.2",
     "typescript": "^5.0.4"
   }
