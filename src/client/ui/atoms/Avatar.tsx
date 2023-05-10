@@ -28,7 +28,7 @@ const avatar = cva(
   }
 );
 
-interface Props
+export interface Props
   extends HTMLAttributes<HTMLElement>,
     VariantProps<typeof avatar> {
   src: string;

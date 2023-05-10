@@ -1,7 +1,7 @@
 import React, { forwardRef, InputHTMLAttributes, Ref } from "react";
 import { cx } from "class-variance-authority";
 
-interface Props extends InputHTMLAttributes<HTMLElement> {
+export interface Props extends InputHTMLAttributes<HTMLElement> {
   className?: string;
   label?: string;
   error?: string | null;

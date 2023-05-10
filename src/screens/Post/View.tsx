@@ -3,10 +3,10 @@ import { env } from "@/env.mjs";
 import Avatar from "@/client/ui/atoms/Avatar";
 import Header from "@/client/ui/atoms/Header";
 
-type Props = {
+export interface Props {
   post: Partial<Post>;
   user: Partial<User>;
-};
+}
 
 export default function PostViewScreen({ post, user }: Props) {
   return (

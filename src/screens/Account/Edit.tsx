@@ -28,11 +28,11 @@ function useZodForm<TSchema extends z.ZodType>(
   return form;
 }
 
-type Props = {
+export interface Props {
   onSubmit: (values: UpdateAccountValidation) => void;
   onUpload: (e?: BaseSyntheticEvent) => void;
   account?: User;
-};
+}
 
 const AccountEditScreen = ({ onSubmit, onUpload, account }: Props) => {
   const methods = useZodForm({ schema: updateAccountValidation });

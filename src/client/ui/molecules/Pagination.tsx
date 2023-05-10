@@ -4,14 +4,14 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import { repeat } from "@/utils/array";
 import IconButton from "@/client/ui/atoms/IconButton";
 
-type Props = {
+export interface Props {
   className?: string;
   page: number;
   pages: number;
   resultsPerPage: number;
   count: number;
   onChange: (page: number) => void;
-};
+}
 
 export default function Pagination({
   className,

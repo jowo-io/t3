@@ -36,7 +36,7 @@ const margins = {
   h6: "mb-4px",
 };
 
-interface Props
+export interface Props
   extends Omit<HTMLAttributes<HTMLElement>, "color">,
     VariantProps<typeof header> {
   options?: ReactNode;

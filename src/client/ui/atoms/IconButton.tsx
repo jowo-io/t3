@@ -36,7 +36,7 @@ const iconButton = cva(
   }
 );
 
-interface Props
+export interface Props
   extends ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof iconButton> {}
 

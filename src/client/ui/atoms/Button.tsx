@@ -30,7 +30,7 @@ const button = cva(["flex", "justify-center", "items-center"], {
   },
 });
 
-interface Props
+export interface Props
   extends ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof button> {}
 

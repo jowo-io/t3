@@ -2,7 +2,7 @@ import React from "react";
 
 import { env } from "@/env.mjs";
 
-type Props = {};
+export interface Props {}
 
 export default function Favicon({}: Props) {
   return (

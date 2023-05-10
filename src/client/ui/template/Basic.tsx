@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from "react";
 import Nav from "@/client/ui/organisms/Nav";
 
-interface Props extends PropsWithChildren {}
+export interface Props extends PropsWithChildren {}
 
 export default function BasicTemplate({ children }: Props) {
   return (

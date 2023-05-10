@@ -6,7 +6,7 @@ import Button from "@/client/ui/atoms/Button";
 import { env } from "@/env.mjs";
 import Avatar from "@/client/ui/atoms/Avatar";
 
-type Props = {};
+export interface Props {}
 
 export default function Nav({}: Props) {
   const { data: session } = useSession();

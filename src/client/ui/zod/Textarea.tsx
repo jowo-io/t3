@@ -1,7 +1,7 @@
 import React, { forwardRef, TextareaHTMLAttributes, Ref } from "react";
 import { cx } from "class-variance-authority";
 
-interface Props extends TextareaHTMLAttributes<HTMLElement> {
+export interface Props extends TextareaHTMLAttributes<HTMLElement> {
   className?: string;
   label?: string;
   error?: string | null;

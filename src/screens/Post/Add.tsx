@@ -21,9 +21,9 @@ function useZodForm<TSchema extends z.ZodType>(
   return form;
 }
 
-type Props = {
+export interface Props {
   onSubmit: (values: AddPostValidation) => void;
-};
+}
 
 export default function PostAddScreen({ onSubmit }: Props) {
   const methods = useZodForm({

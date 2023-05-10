@@ -6,10 +6,10 @@ import { env } from "@/env.mjs";
 import Avatar from "@/client/ui/atoms/Avatar";
 import Header from "@/client/ui/atoms/Header";
 
-type Props = {
+export interface Props {
   data?: RouterOutputs["post"]["list"];
   onChangePage: (page: number) => void;
-};
+}
 
 export default function PostListScreen({ data, onChangePage }: Props) {
   return (

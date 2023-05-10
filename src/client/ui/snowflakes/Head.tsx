@@ -8,7 +8,7 @@ import { env } from "@/env.mjs";
 export const appName = "Test App";
 export const defaultOgImage = `/meta/default-og-image.webp`;
 
-interface Props extends PropsWithChildren {
+export interface Props extends PropsWithChildren {
   description: string;
   title: string;
   image?: string;
