@@ -4,7 +4,7 @@ import { cva, cx, type VariantProps } from "class-variance-authority";
 const defaultTag = "h1";
 
 const header = cva(
-  ["my-0", "max-w-full", "font-bold", "leading-1", "text-white", "font-header"],
+  ["my-0", "max-w-full", "font-bold", "leading-1", "font-header"],
   {
     variants: {
       tag: {
@@ -15,9 +15,14 @@ const header = cva(
         h5: ["text-md"],
         h6: ["text-sm"],
       },
+      color: {
+        white: "text-white",
+        black: "text-black",
+      },
     },
     defaultVariants: {
       tag: defaultTag,
+      color: "white",
     },
   }
 );
@@ -32,12 +37,18 @@ const margins = {
 };
 
 interface Props
-  extends HTMLAttributes<HTMLElement>,
+  extends Omit<HTMLAttributes<HTMLElement>, "color">,
     VariantProps<typeof header> {
   options?: ReactNode;
 }
 
-export default function Header({ children, tag, options, className }: Props) {
+export default function Header({
+  tag,
+  color,
+  children,
+  className,
+  options,
+}: Props) {
   const Tag = tag || defaultTag;
   return (
     <div
@@ -50,7 +61,7 @@ export default function Header({ children, tag, options, className }: Props) {
         className
       )}
     >
-      <Tag className={header({ tag })}>{children}</Tag>
+      <Tag className={header({ tag, color })}>{children}</Tag>
       {options && (
         <div className={cx("flex", "items-center", "justify-center")}>
           {options}

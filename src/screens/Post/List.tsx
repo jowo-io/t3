@@ -33,7 +33,9 @@ export default function PostListScreen({ data, onChangePage }: Props) {
                 <small>
                   <b>{post.slug}</b>
                 </small>
-                <h3 className="text-xl font-bold">{post.title}</h3>
+                <Header tag="h3" color="black">
+                  {post.title}
+                </Header>
                 <p className="my-xs">{post.summary}</p>
 
                 {user?.image && (

@@ -6,6 +6,7 @@ import Button from "@/client/ui/atoms/Button";
 import Spinner from "@/client/ui/atoms/Spinner";
 import { addPostValidation, AddPostValidation } from "@/schema/validation";
 import { Textarea, Input } from "@/client/ui/zod";
+import Header from "@/client/ui/atoms/Header";
 
 function useZodForm<TSchema extends z.ZodType>(
   props: Omit<UseFormProps<TSchema["_input"]>, "resolver"> & {
@@ -35,7 +36,8 @@ export default function PostAddScreen({ onSubmit }: Props) {
 
   return (
     <div className="w-full">
-      <h2 className="mb-sm text-white">Add a post</h2>
+      <Header tag="h2">Add a post</Header>
+
       <form
         onSubmit={methods.handleSubmit(async (values) => {
           console.log("values", values);
