@@ -12,7 +12,6 @@ Below are some personal TODOs I'd like to complete on this project before moving
 - consider how loading states are handled
 - consider how auth walls are handled
 - consider how errors and global exceptions are handled
-- expand prettier config and run linter on all files
 - final sweep of the code to ensure everything is neat and tidy
 
 ---
