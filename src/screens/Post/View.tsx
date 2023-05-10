@@ -18,10 +18,7 @@ export default function PostViewScreen({ post, user }: Props) {
         key={post.id}
         className="overflow-hidden rounded-lg bg-white p-sm shadow"
       >
-        <small className="flex w-full flex-row items-center justify-between">
-          <b>{post.slug}</b>
-          {!post.isPublished && <i>Draft</i>}
-        </small>
+        <small className="text-sm">{!post.isPublished && <i>Draft</i>}</small>
 
         <div>{post.text}</div>
       </article>

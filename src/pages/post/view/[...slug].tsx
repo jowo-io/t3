@@ -13,7 +13,8 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const { user: currentUser } = await getServerAuthSession(ctx);
 
   // if no id is provided return no post
-  const postId = ctx.query.id;
+  const postId = ctx.query?.slug?.[0];
+
   if (typeof postId !== "string") return { props: {} };
 
   // attempt post select

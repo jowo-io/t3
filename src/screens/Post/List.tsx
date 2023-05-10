@@ -29,12 +29,8 @@ export default function PostListScreen({ data, onChangePage }: Props) {
       <div className="flex w-full flex-col gap-xs">
         {data &&
           data.results.map(({ post, user }) => (
-            <Link key={post.id} href={`/post/view/${post.id}`}>
+            <Link key={post.id} href={`/post/view/${post.id}/${post.slug}`}>
               <article className="overflow-hidden rounded-lg bg-white p-sm shadow shadow-primary">
-                <small>
-                  <b>{post.slug}</b>
-                </small>
-
                 <Header tag="h3" color="black">
                   {post.title}
                 </Header>
