@@ -29,20 +29,22 @@ export default function PostListScreen({ data, onChangePage }: Props) {
       <div className="flex w-full flex-col gap-xs">
         {data &&
           data.results.map(({ post, user }) => (
-            <Link key={post.id} href={`/post/view/${post.id}/${post.slug}`}>
-              <article className="overflow-hidden rounded-lg bg-white p-sm shadow shadow-primary">
-                <Header tag="h4" color="black">
-                  {post.title}
-                </Header>
+            <Link
+              key={post.id}
+              href={`/post/view/${post.id}/${post.slug}`}
+              className="block max-w-sm rounded-lg border border-gray-400 bg-white p-sm hover:border-gray-100 hover:bg-gray-100 hover:text-black"
+            >
+              <Header tag="h4" color="black">
+                {post.title}
+              </Header>
 
-                <p className="my-xs">{post.summary}</p>
+              <p className="my-xs">{post.summary}</p>
 
-                <TitledAvatar
-                  size="md"
-                  src={env.NEXT_PUBLIC_STORAGE_URL + user?.image}
-                  title={`By ${user?.name || "anonymous"}`}
-                />
-              </article>
+              <TitledAvatar
+                size="md"
+                src={env.NEXT_PUBLIC_STORAGE_URL + user?.image}
+                title={`By ${user?.name || "anonymous"}`}
+              />
             </Link>
           ))}
       </div>
