@@ -5,7 +5,6 @@ Below are some personal TODOs I'd like to complete on this project before moving
 #### actions:
 
 - add search input/filters in posts page
-- consider adding constants/utils for links
 - investigate use of next/image
 - tidy and improve Pagination and IconButton components
 - add test file for all utils e.g. `src\server\utils\s3.ts`
@@ -61,6 +60,8 @@ This app is opinionated. It implements some code and design patterns that I love
 
   import three from "./three"; // 3rd
   ```
+
+- **PathNames** - all of the nextjs pages that can be found in the `src/pages/` folder are also added to an enum in the `src\client\utils\links.ts` file, which is imported when ever a page link or redirect is required.
 
 ### Service providers
 

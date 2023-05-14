@@ -1,6 +1,8 @@
+import { useRouter } from "next/router";
+
 import Button from "@/client/ui/atoms/Button";
 import Header from "@/client/ui/atoms/Header";
-import { useRouter } from "next/router";
+import { PathNames } from "@/client/utils/links";
 
 export interface Props {}
 
@@ -15,7 +17,7 @@ export default function ErrorNotFoundScreen({}: Props) {
         But don&quot;t worry, you can find plenty of other things by navigating
         back to the homepage.
       </p>
-      <Button size="lg" onClick={() => push("/")}>
+      <Button size="lg" onClick={() => push(PathNames.home)}>
         Back to homepage
       </Button>
     </div>

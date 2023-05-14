@@ -6,6 +6,7 @@ import { env } from "@/env.mjs";
 import Avatar from "@/client/ui/atoms/Avatar";
 import Header from "@/client/ui/atoms/Header";
 import TitledAvatar from "@/client/ui/molecules/TitledAvatar";
+import { PathNames } from "@/client/utils/links";
 
 export interface Props {
   data?: RouterOutputs["post"]["list"];
@@ -18,7 +19,7 @@ export default function PostListScreen({ data, onChangePage }: Props) {
       <Header
         tag="h2"
         options={
-          <Link className="text-white" href="/post/add">
+          <Link className="text-white" href={PathNames.addPost}>
             Add post
           </Link>
         }
@@ -31,7 +32,10 @@ export default function PostListScreen({ data, onChangePage }: Props) {
           data.results.map(({ post, user }) => (
             <Link
               key={post.id}
-              href={`/post/view/${post.id}/${post.slug}`}
+              href={{
+                pathname: PathNames.viewPost,
+                query: { id: post.id, slug: post.slug },
+              }}
               className="block max-w-sm rounded-lg border border-gray-400 bg-white p-sm hover:border-gray-100 hover:bg-gray-100 hover:text-black"
             >
               <Header tag="h4" color="black">

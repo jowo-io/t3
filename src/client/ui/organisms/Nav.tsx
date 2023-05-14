@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import Button from "@/client/ui/atoms/Button";
 import TitledAvatar from "@/client/ui/molecules/TitledAvatar";
+import { PathNames } from "@/client/utils/links";
 
 import { env } from "@/env.mjs";
 
@@ -13,12 +14,12 @@ export default function Nav({}: Props) {
   const { data: session } = useSession();
 
   const links = [
-    { text: "Home", path: "/" },
-    { text: "Posts", path: "/post" },
+    { text: "Home", path: PathNames.home },
+    { text: "Posts", path: PathNames.listPosts },
   ];
 
   if (session) {
-    links.push({ text: "Account", path: "/account" });
+    links.push({ text: "Account", path: PathNames.editAccount });
   }
 
   return (
