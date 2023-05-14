@@ -51,7 +51,7 @@ This app is opinionated. It implements some code and design patterns that I love
   - `src/utils/` - isomorphic utils that are shared across the stack
   - `src/server/utils/` - serverside only utils
   - `src/client/utils/` - clientside only utils
-- **import order** - Modules are typically imported in this order: dependency, aliased, relative. for example:
+- **Import order** - Modules are typically imported in this order: dependency, aliased, relative. for example:
 
   ```typescript
   import one from "one"; // 1st
