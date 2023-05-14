@@ -47,8 +47,20 @@ This app is opinionated. It implements some code and design patterns that I love
 
 - **Atomic design system** - In the `src/ui` folder, you'll see the components subdivided into `atoms/`, `molecules/`, `organisms/` etc. This is based on the [atomic design system](https://atomicdesign.bradfrost.com/)
 - **page/screen separation** - In this app you will find the `src/pages` to be logic heavy, importing all the necesary hooks and configuring all the relevant business logic. And you will find the `src/screens` to be light on logic but heavy on UI.
-- **Schema folder** -
-- **Utils folders** -
+- **Schema folder** - Various schemas that are shared by the serverside and clientside are stored in the `src/schema` folder. These schemas handle things like the db models and form/api input validation.
+- **Utils folders** - There are 3 folders for utils in the app:
+  - `src/utils/` - isomorphic utils that are shared across the stack
+  - `src/server/utils/` - serverside only utils
+  - `src/client/utils/` - clientside only utils
+- **import order** - Modules are typically imported in this order: dependency, aliased, relative. for example:
+
+  ```typescript
+  import one from "one"; // 1st
+
+  import two from "@/utils/two"; // 2nd
+
+  import three from "./three"; // 3rd
+  ```
 
 ### Service providers
 
