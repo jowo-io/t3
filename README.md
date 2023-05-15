@@ -39,6 +39,7 @@ This app was built with VSCode, and as such contains some configuration in the `
 
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) and [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) - both plugins required for compatibility with the `eslint-config-prettier` dependency
 - [Run current test](https://marketplace.visualstudio.com/items?itemName=asvetliakov.run-current-test) (optional)
+- [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) (optional)
 
 ### Patterns
 

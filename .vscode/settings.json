@@ -15,5 +15,6 @@
   "typescript.preferences.autoImportFileExcludePatterns": [
     "**/*.test.ts",
     "**/*.stories.ts"
-  ]
+  ],
+  "cSpell.words": ["lnurl"]
 }
