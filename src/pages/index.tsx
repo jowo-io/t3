@@ -3,8 +3,11 @@ import React, { PropsWithChildren } from "react";
 import Head from "@/client/ui/snowflakes/Head";
 import BasicTemplate from "@/client/ui/templates/Basic";
 import Header from "@/client/ui/atoms/Header";
+import { useSession } from "next-auth/react";
 
 export default function HomePage({}: PropsWithChildren) {
+  const session = useSession();
+  // console.log(session);
   return (
     <BasicTemplate>
       <Head description="This is a demo app" title="Demo app" />

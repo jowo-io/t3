@@ -1,5 +1,6 @@
 import { accountRouter } from "@/server/routers/account";
 import { postRouter } from "@/server/routers/post";
+import { lnauthRouter } from "@/server/routers/lnauth";
 
 import { createTRPCRouter } from "../trpc";
 
@@ -11,6 +12,7 @@ import { createTRPCRouter } from "../trpc";
 export const appRouter = createTRPCRouter({
   account: accountRouter,
   post: postRouter,
+  lnauth: lnauthRouter,
 });
 
 // export type definition of API

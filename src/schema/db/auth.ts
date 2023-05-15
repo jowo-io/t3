@@ -83,11 +83,29 @@ export const userTable = mysqlTable(
     emailVerified: timestamp("emailVerified"),
     image: text("image"),
     role: text("role").notNull(),
+    pubkey: text("pubkey"),
     createdAt: timestamp("createdAt").defaultNow().notNull(),
     updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
   },
   (user) => ({
     emailIndex: uniqueIndex("user__email__idx").on(user.email),
+  })
+);
+
+export const lnAuthTable = mysqlTable(
+  "ln_auth",
+  {
+    id: varchar("id", { length: idLength }).primaryKey().notNull(),
+    k1: text("k1").notNull(),
+    pubkey: text("pubkey").notNull(),
+    userId: varchar("userId", { length: idLength }),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+    updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  },
+  (lnAuth) => ({
+    idIndex: index("ln_auth__id__idx").on(lnAuth.id),
+    k1Index: uniqueIndex("ln_auth__k1__idx").on(lnAuth.k1),
+    userIdIndex: index("ln_auth__userId__idx").on(lnAuth.userId),
   })
 );
 

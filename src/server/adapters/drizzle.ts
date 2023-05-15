@@ -13,6 +13,7 @@ import {
 export function DrizzleAdapter(db: MySql2Database): Adapter {
   return {
     async createUser(userData) {
+      // console.log("createUser", userData);
       await db.insert(userTable).values({
         id: createId(),
         email: userData.email,
@@ -31,6 +32,7 @@ export function DrizzleAdapter(db: MySql2Database): Adapter {
       return row;
     },
     async getUser(id) {
+      // console.log("getUser", id);
       const rows = await db
         .select()
         .from(userTable)
@@ -40,6 +42,7 @@ export function DrizzleAdapter(db: MySql2Database): Adapter {
       return row ?? null;
     },
     async getUserByEmail(email) {
+      // console.log("getUserByEmail", email);
       const rows = await db
         .select()
         .from(userTable)
@@ -49,6 +52,7 @@ export function DrizzleAdapter(db: MySql2Database): Adapter {
       return row ?? null;
     },
     async getUserByAccount({ providerAccountId, provider }) {
+      // console.log("getUserByAccount", providerAccountId, provider);
       const rows = await db
         .select()
         .from(userTable)
@@ -64,6 +68,7 @@ export function DrizzleAdapter(db: MySql2Database): Adapter {
       return row?.user ?? null;
     },
     async updateUser({ id, ...userData }) {
+      // console.log("updateUser", id, userData);
       if (!id) throw new Error("User not found");
       await db.update(userTable).set(userData).where(eq(userTable.id, id));
       const rows = await db
@@ -76,9 +81,12 @@ export function DrizzleAdapter(db: MySql2Database): Adapter {
       return row;
     },
     async deleteUser(userId) {
+      // console.log("deleteUser", userId);
       await db.delete(userTable).where(eq(userTable.id, userId));
     },
     async linkAccount(account) {
+      // console.log("linkAccount", account);
+
       await db.insert(accountTable).values({
         id: createId(),
         provider: account.provider,
@@ -97,6 +105,7 @@ export function DrizzleAdapter(db: MySql2Database): Adapter {
       });
     },
     async unlinkAccount({ providerAccountId, provider }) {
+      // console.log("unlinkAccount", providerAccountId, provider);
       await db
         .delete(accountTable)
         .where(
@@ -107,6 +116,7 @@ export function DrizzleAdapter(db: MySql2Database): Adapter {
         );
     },
     async createSession(data) {
+      // console.log("createSession", data);
       await db.insert(sessionTable).values({
         id: createId(),
         expires: data.expires,
@@ -123,6 +133,7 @@ export function DrizzleAdapter(db: MySql2Database): Adapter {
       return row;
     },
     async getSessionAndUser(sessionToken) {
+      // console.log("getSessionAndUser", sessionToken);
       const rows = await db
         .select({
           user: userTable,
@@ -151,6 +162,7 @@ export function DrizzleAdapter(db: MySql2Database): Adapter {
       };
     },
     async updateSession(session) {
+      // console.log("updateSession", session);
       await db
         .update(sessionTable)
         .set(session)
@@ -165,11 +177,13 @@ export function DrizzleAdapter(db: MySql2Database): Adapter {
       return row;
     },
     async deleteSession(sessionToken) {
+      // console.log("deleteSession", sessionToken);
       await db
         .delete(sessionTable)
         .where(eq(sessionTable.sessionToken, sessionToken));
     },
     async createVerificationToken(verificationToken) {
+      // console.log("createVerificationToken", verificationToken);
       await db.insert(verificationTokenTable).values({
         expires: verificationToken.expires,
         identifier: verificationToken.identifier,
@@ -186,6 +200,7 @@ export function DrizzleAdapter(db: MySql2Database): Adapter {
       return row;
     },
     async useVerificationToken({ identifier, token }) {
+      // console.log("useVerificationToken", identifier, token);
       // First get the token while it still exists. TODO: need to add identifier to where clause?
       const rows = await db
         .select()
