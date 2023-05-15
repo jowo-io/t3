@@ -8,5 +8,5 @@ export default {
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   out: "migrations",
-  schema: ["./src/db/auth.ts", "./src/db/schema.ts"],
+  schema: ["./src/schema/db/index.ts"],
 } satisfies Config;
