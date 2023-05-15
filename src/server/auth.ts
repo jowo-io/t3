@@ -10,7 +10,6 @@ import EmailProvider from "next-auth/providers/email";
 
 import { DrizzleAdapter } from "./adapters/drizzle";
 import { db } from "@/server/db";
-
 import { env } from "@/env.mjs";
 
 /**
@@ -35,6 +34,11 @@ declare module "next-auth" {
  * @see https://next-auth.js.org/configuration/options
  */
 export const authOptions: NextAuthOptions = {
+  session: {
+    strategy: "database",
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+    updateAge: 24 * 60 * 60, // 24 hours
+  },
   callbacks: {
     session({ session, user }) {
       if (session.user) {
@@ -48,6 +52,8 @@ export const authOptions: NextAuthOptions = {
   theme: { colorScheme: "dark" },
   providers: [
     EmailProvider({
+      id: "email",
+      name: "Email",
       normalizeIdentifier(identifier: string): string {
         let [local, domain] = identifier.toLowerCase().trim().split("@");
         domain = domain?.split(",")[0];
